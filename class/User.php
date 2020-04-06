@@ -3,25 +3,25 @@
     class User extends Database{
 
         public function createAccount($username,$email,$password){
-            $sql = "INSERT INTO accounts(username,email,password)VALUES('$username','$email','$password')";
-            $result = $this->conn->query($sql);
+            $firstSql = "SELECT COUNT(*) FROM accounts WHERE email='$email' " ;
+            $firstResult = $this->conn->query($firstSql);
 
-            if($result == false){
-                die('CANNOT ADD USER: '.$this->conn->error);
-            }else{
-                header("location:../views/login.php");
+            
+            //to do - make it can't log in if the same email address is already registered
+            if($firstResult->num_rows == 0){
+                $secondSql = "INSERT INTO accounts(username,email,password)VALUES('$username','$email','$password')";
+                $secondResult = $this->conn->query($secondSql);
+
+                if($secondResult == FALSE){
+                    die('CANNOT ADD USER: '.$this->conn->error);
+                }else{
+                    header("location:../views/login.php");
+                }
             }
+            // else{
+            //     return FALSE;
+            // }
         }
-        // public function checkDuplicateAccount($email){
-        //     $sql = "SELECT COUNT(*) AS cnt FROM accounts WHERE email='$email' " ;
-        //     $result = $this->conn->query($sql);
-                // echo $result;
-        //     if($result > 0){
-        //         return TRUE;
-        //     }else{
-        //         return FALSE;
-        //     }
-        // }
         public function login($username, $password){
             $sqlResult = $this->conn->prepare('SELECT * FROM accounts WHERE username =? AND password=?');
             $sqlResult->bind_param('ss',$username,$password);

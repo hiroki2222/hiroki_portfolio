@@ -8,7 +8,9 @@
         $email = $_POST['email'];
         $password = md5($_POST['password']);
 
-        // if(!($user->checkDuplicateAccount($email))){
+        // if(!$createAccount){
+        //     $_SESSION['duplicate_error'];
+        // }else{
             $user->createAccount($username,$email,$password);
         // }
     }
