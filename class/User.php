@@ -2,33 +2,58 @@
     require_once "Database.php";
     class User extends Database{
 
+
+        public function checkExistedAccount($email){
+            $checkExistedAccount = "SELECT COUNT(*) FROM accounts WHERE email='$email' " ;
+            $resultOfCheck = $this->conn->query($checkExistedAccount);
+            // print_r($resultOfCheck);
+            if($resultOfCheck->num_rows > 0){
+                return TRUE;
+            }else{
+                return FALSE;
+            }
+        }
         public function createAccount($username,$email,$password){
-            $firstSql = "SELECT COUNT(*) FROM accounts WHERE email='$email' " ;
-            $firstResult = $this->conn->query($firstSql);
-
-            
-            //to do - make it can't log in if the same email address is already registered
-            if($firstResult->num_rows == 0){
-                $secondSql = "INSERT INTO accounts(username,email,password)VALUES('$username','$email','$password')";
-                $secondResult = $this->conn->query($secondSql);
-
-                if($secondResult == FALSE){
+                $createAccount = "INSERT INTO accounts(username,email,password)VALUES('$username','$email','$password')";
+                $createUser = "INSERT INTO users(username)VALUES('$username')";
+                $newAccount = $this->conn->query($createAccount);
+                $newUser = $this->conn->query($createUser);
+                if($newAccount == FALSE || $newUser == FALSE){
                     die('CANNOT ADD USER: '.$this->conn->error);
                 }else{
-                    header("location:../views/login.php");
+                    header("location:../views/addMoreInfo.php");
                 }
             }
-            // else{
-            //     return FALSE;
-            // }
-        }
-        public function login($username, $password){
-            $sqlResult = $this->conn->prepare('SELECT * FROM accounts WHERE username =? AND password=?');
-            $sqlResult->bind_param('ss',$username,$password);
+        // public function createAccount($email,$password){
+        //     $createAccount = "INSERT INTO accounts(email,password)VALUES('$email','$password')";
+        //     $createUser = "INSERT INTO users";
+
+
+            
+        //     //to do - make it can't create account if the same email address is already registered
+        //     if($resultOfCheck->num_rows > 0){
+        //         // return 'alreadyExisted';
+        //         return 'f';
+        //     }else{
+        //         $newAccount = $this->conn->query($createAccount);
+        //         $newUser = $this->conn->query($createUser);
+
+        //         if($newAccount == FALSE || $newUser == FALSE){
+        //             die('CANNOT ADD USER: '.$this->conn->error);
+        //         }else{
+        //             header("location:../views/login.php");
+        //         }
+        //         // return 't';
+        //     }
+        // }
+
+        public function login($email, $password){
+            $sqlResult = $this->conn->prepare('SELECT * FROM accounts WHERE email =? AND password=?');
+            $sqlResult->bind_param('ss',$email,$password);
 
             $sqlResult->execute();
             // $sqlResult->store_result();
-            $sqlResult->bind_result($id,$username,$email,$password,$status);
+            $sqlResult->bind_result($id,$email,$password,$status);
             if ($sqlResult->fetch()) {
                 return TRUE;
             } else {

@@ -2,6 +2,7 @@ Page
  Registration
   - Login
      -user top(index)
+      -see profile
       -edit profile
       -delete account
       -form page

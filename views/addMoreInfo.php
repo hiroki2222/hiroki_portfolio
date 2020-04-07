@@ -20,20 +20,35 @@
                   <form action="../action/userAction.php" method="post">
                       <div class="form-row">
                             <div class="form-group col-md-12 mb-4">
+                                <select name="address" id="address" class="w-100">
+                                    <option value="" selected disabled  class="form-control">Address</option>
+                                    <option value="male">Japan</option>
+                                    <option value="male">Overseas</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-12 mb-4">
                               <input type="number" name="age" id="age" class="p-4 form-control" placeholder="age">
                             </div>
                             <div class="form-group col-md-12 mb-4">
-                              <input type="text" name="age" id="age" class="p-4 form-control" placeholder="job">
-                            </div>
-                            <div class="form-group col-md-12 mb-4">
-                              <input type="text" name="age" id="age" class="p-4 form-control" placeholder="school">
-                            </div>
-                            <div class="form-group col-md-12 mb-4">
                                 <select name="gender" id="" class="w-100">
-                                    <option value="Others" selected disabled  class="form-control">Gender</option>
+                                    <option value="" selected disabled  class="form-control">Gender</option>
+                                    <option value="male">Male</option>
+                                    <option value="male">Female</option>
+                                    <option value="male">Others</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-12 mb-4">
+                                <select name="like" id="" class="w-100">
+                                    <option value="" selected disabled  class="form-control">Like</option>
                                     <option value="male">Male</option>
                                     <option value="male">Female</option>
                                 </select>
+                            </div>
+                            <div class="form-group col-md-12 mb-4">
+                              <input type="text" name="job" id="job" class="p-4 form-control" placeholder="job">
+                            </div>
+                            <div class="form-group col-md-12 mb-4">
+                              <input type="text" name="school" id="school" class="p-4 form-control" placeholder="school">
                             </div>
                             <div class="form-group col-md-12 mb-4">
                               <input type="text" name="username" id="" class="p-4 form-control" placeholder="Your Hobby">
@@ -43,10 +58,10 @@
                             </div>
                         <br>
                         <div class="form-group col-md-12 mb-4 collapse" class="" id="oneMoreHobby">
-                              <input type="text" name="username" id="" class="p-4 form-control" placeholder="Your Hobby">
+                              <input type="text" name="one_more_hobby" id="" class="p-4 form-control" placeholder="Your Hobby">
                         </div>
-                        <div class="form-group col-md-12 mb-4">
-                              <input type="password" name="password" id="" class="p-4 form-control" placeholder="PASSWORD">
+                        <div class="form-group col-md-12 mb-4 collapse" class="" id="">
+                          <input type="file" name="image" size="35">
                         </div>
                         <div class="form-group col-md-12 mb-4">
                               <button type="submit" class="btn btn-dark form-control text-uppercase" name="login">Add</button>

@@ -7,13 +7,28 @@
         $username = $_POST['username'];
         $email = $_POST['email'];
         $password = md5($_POST['password']);
-
-        // if(!$createAccount){
-        //     $_SESSION['duplicate_error'];
-        // }else{
+        $check = $user->checkExistedAccount($email);
+        if($check == TRUE){
+            $_SESSION['duplicate_error'] == TRUE;
+        }else{
             $user->createAccount($username,$email,$password);
-        // }
+        }
     }
+
+    // if(isset($_POST['register'])){
+    //     $username = $_POST['username'];
+    //     $email = $_POST['email'];
+    //     $password = md5($_POST['password']);
+
+    //     // $createAccount = $user->createAccount($email,$password);
+    //     if($createAccount == 'f'){
+    //         echo 'account exist';
+    //         // $_SESSION['duplicate_error'] == TRUE;
+    //     }else{
+    //         // echo 'account doesnt exist';
+    //         $user->createAccount($email,$password);
+    //     }
+    // }
     elseif(isset($_POST['login'])){
         $username = $_POST['username'];
         $password = md5($_POST['password']);
