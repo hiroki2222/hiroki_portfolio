@@ -4,11 +4,15 @@
 
 
         public function checkExistedAccount($email){
-            $checkExistedAccount = "SELECT COUNT(*) FROM accounts WHERE email='$email' " ;
+            $checkExistedAccount = "SELECT COUNT(*) AS account FROM accounts WHERE email='$email'" ;
             $resultOfCheck = $this->conn->query($checkExistedAccount);
-            // print_r($resultOfCheck);
-            if($resultOfCheck->num_rows > 0){
-                return TRUE;
+            if($resultOfCheck->num_rows == 1){
+                $row = $resultOfCheck->fetch_assoc();
+                if($row['account'] == 1){
+                    return TRUE;
+                }else{
+                    return FALSE;
+                }
             }else{
                 return FALSE;
             }

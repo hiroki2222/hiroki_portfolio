@@ -1,6 +1,5 @@
 <?php
     include '../action/userAction.php';
-
 ?>
 
 <!doctype html>
@@ -29,9 +28,12 @@
                   <div class="form-group display-4 mt-5">
                       <label for="email">Email</label>
                       <input type="text" name="email" id="email" class="form-control" placeholder="Enter Email" required>
-                        <?php if($_SESSION['duplicate']): ?>
-                        <p>the email address already exists</p>
-                        <?php endif; ?>
+                        <?php 
+                            // if($_SESSION['duplicate']): ?>
+                        <!-- <p>the email address already exists</p> -->
+                        <?php 
+                            // endif; 
+                        ?>
                   </div>
                   <div class="form-group display-4 mt-5">
                       <label for="password">Password</label>

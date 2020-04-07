@@ -9,9 +9,12 @@
         $password = md5($_POST['password']);
         $check = $user->checkExistedAccount($email);
         if($check == TRUE){
-            $_SESSION['duplicate_error'] == TRUE;
-        }else{
-            $user->createAccount($username,$email,$password);
+            // echo $check;
+            echo "That email is already taken...";
+        //     $_SESSION['duplicate_error'] == TRUE;
+        }elseif($check == FALSE){
+            echo "ACCOUNT CREATED";
+            // $user->createAccount($username,$email,$password);
         }
     }
 
