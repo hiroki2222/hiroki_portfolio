@@ -11,8 +11,9 @@
   </head>
   <body>
       <div class="border-bottom">
-          <h1 class="display-4"></h1>
+          <h1 class="display-4">Match.com</h1>
       </div>
+      
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
