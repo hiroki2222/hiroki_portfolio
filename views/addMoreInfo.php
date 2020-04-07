@@ -1,3 +1,6 @@
+<?php
+    include '../action/userAction.php';
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -5,7 +8,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <script src="https://kit.fontawesome.com/eb83b1af77.js" crossorigin="anonymous"></script>
+    <!-- <script src="https://kit.fontawesome.com/eb83b1af77.js" crossorigin="anonymous"></script> -->
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -17,31 +20,30 @@
                   <h2 class="text-center">Add More Info</h2>
               </div>
               <div class="card-body">
-                  <form action="../action/userAction.php" method="post">
+                  <form action="" method="post">
                       <div class="form-row">
                             <div class="form-group col-md-12 mb-4">
-                                <select name="address" id="address" class="w-100">
+                                <select name="address" id="address" class="w-100 form-control">
                                     <option value="" selected disabled  class="form-control">Address</option>
-                                    <option value="male">Japan</option>
-                                    <option value="male">Overseas</option>
+                                    <option value="japan">Japan</option>
+                                    <option value="overseas">Overseas</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-12 mb-4">
                               <input type="number" name="age" id="age" class="p-4 form-control" placeholder="age">
                             </div>
                             <div class="form-group col-md-12 mb-4">
-                                <select name="gender" id="" class="w-100">
+                                <select name="gender" id="" class="w-100 form-control">
                                     <option value="" selected disabled  class="form-control">Gender</option>
                                     <option value="male">Male</option>
-                                    <option value="male">Female</option>
-                                    <option value="male">Others</option>
+                                    <option value="female">Female</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-12 mb-4">
-                                <select name="like" id="" class="w-100">
+                                <select name="like" id="" class="w-100 form-control">
                                     <option value="" selected disabled  class="form-control">Like</option>
                                     <option value="male">Male</option>
-                                    <option value="male">Female</option>
+                                    <option value="female">Female</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-12 mb-4">
@@ -51,20 +53,19 @@
                               <input type="text" name="school" id="school" class="p-4 form-control" placeholder="school">
                             </div>
                             <div class="form-group col-md-12 mb-4">
-                              <input type="text" name="username" id="" class="p-4 form-control" placeholder="Your Hobby">
-                              <a data-toggle="collapse" href="#oneMoreHobby" aria-expanded="false" aria-controls="oneMoreHobby">
+                              <input type="text" name="hobby" id="" class="p-4 form-control" placeholder="Your Hobby">
+                              <!-- <a data-toggle="collapse" href="#oneMoreHobby" aria-expanded="false" aria-controls="oneMoreHobby">
                               <i class="fas fa-plus-circle"></i>
                             </a>Add More Hobbies
+                            </div> -->
                             </div>
                         <br>
-                        <div class="form-group col-md-12 mb-4 collapse" class="" id="oneMoreHobby">
-                              <input type="text" name="one_more_hobby" id="" class="p-4 form-control" placeholder="Your Hobby">
-                        </div>
-                        <div class="form-group col-md-12 mb-4 collapse" class="" id="">
-                          <input type="file" name="image" size="35">
+                        <input type="file" name="pic" id="" class="form-control">
+                        <div class="form-group col-md-12 mb-4">
+                              <button type="submit" class="btn btn-dark form-control text-uppercase" name="add">Add</button>
                         </div>
                         <div class="form-group col-md-12 mb-4">
-                              <button type="submit" class="btn btn-dark form-control text-uppercase" name="login">Add</button>
+                              <button type="submit" class="btn btn-dark form-control text-uppercase" name="skip">Skip</button>
                         </div>
                       </div>
                   </form>

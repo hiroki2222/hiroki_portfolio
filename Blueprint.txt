@@ -17,10 +17,11 @@ Database(portfolio)
   - accounts (account_id/username/email/password)
   - user (user_id/username/address/age/gender/like/job/school/hobby1/hobby2/hobby3/user_image1/user_image2/user_image3)
   - deletedAccount (deleted_account_id/email)
+  - likes (sent_user_id/received_user_id)
 
 Function
  - can't make an account if you already used the same email address
- - can't make an account if your email is on the deletedAccount table
+ - (can't make an account if your email is on the deletedAccount table)
  - like
    - if you like him/her and the one like you too it will be a match
    - the maximum number of likes is 10 a day

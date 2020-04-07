@@ -19,7 +19,7 @@
                   <form action="../action/userAction.php" method="post">
                       <div class="form-row">
                           <div class="form-group col-md-12 mb-4">
-                              <input type="text" name="username" id="" class="p-4 form-control" placeholder="USERNAME">
+                              <input type="text" name="email" id="" class="p-4 form-control" placeholder="Email">
                           </div>
                           <div class="form-group col-md-12 mb-4">
                               <input type="password" name="password" id="" class="p-4 form-control" placeholder="PASSWORD">

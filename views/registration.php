@@ -29,8 +29,8 @@
                       <label for="email">Email</label>
                       <input type="text" name="email" id="email" class="form-control" placeholder="Enter Email" required>
                         <?php 
-                            // if($_SESSION['duplicate']): ?>
-                        <!-- <p>the email address already exists</p> -->
+                        //  if($_SESSION['duplicate_error'] == TRUE): ?>
+                        <!-- // <p>the email address already exists</p> -->
                         <?php 
                             // endif; 
                         ?>
