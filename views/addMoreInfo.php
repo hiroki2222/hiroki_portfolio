@@ -20,7 +20,7 @@
                   <h2 class="text-center">Add More Info</h2>
               </div>
               <div class="card-body">
-                  <form action="" method="post">
+                  <form action="" method="post" enctype="multipart/form-data">
                       <div class="form-row">
                             <div class="form-group col-md-12 mb-4">
                                 <select name="address" id="address" class="w-100 form-control">
@@ -35,15 +35,15 @@
                             <div class="form-group col-md-12 mb-4">
                                 <select name="gender" id="" class="w-100 form-control">
                                     <option value="" selected disabled  class="form-control">Gender</option>
-                                    <option value="male">Male</option>
-                                    <option value="female">Female</option>
+                                    <option value="m">Male</option>
+                                    <option value="f">Female</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-12 mb-4">
                                 <select name="like" id="" class="w-100 form-control">
                                     <option value="" selected disabled  class="form-control">Like</option>
-                                    <option value="male">Male</option>
-                                    <option value="female">Female</option>
+                                    <option value="m">Male</option>
+                                    <option value="f">Female</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-12 mb-4">
@@ -60,11 +60,17 @@
                             </div> -->
                             </div>
                         <br>
-                        <input type="file" name="pic" id="" class="form-control">
                         <div class="form-group col-md-12 mb-4">
+                          <input type="file" name="pic" id="" class="form-control">
+                        </div>
+                        <br>
+                        <div class="form-group col-md-12 mb-4">
+                        </div>
+                        <br>
+                        <div class="form-group col-md-12">
                               <button type="submit" class="btn btn-dark form-control text-uppercase" name="add">Add</button>
                         </div>
-                        <div class="form-group col-md-12 mb-4">
+                        <div class="form-group col-md-12">
                               <button type="submit" class="btn btn-dark form-control text-uppercase" name="skip">Skip</button>
                         </div>
                       </div>

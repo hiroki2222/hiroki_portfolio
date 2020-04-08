@@ -10,8 +10,8 @@
         $check = $user->checkExistedAccount($email);
         if($check == TRUE){
             // echo $check;
-            echo "That email is already taken...";
-            // $_SESSION['duplicate_error'] == TRUE;
+            // echo "That email is already taken...";
+            return $_SESSION['duplicate_error'] = TRUE;
         }elseif($check == FALSE){
             // echo "ACCOUNT CREATED";
             $user->createAccount($username,$email,$password);
@@ -25,22 +25,23 @@
         $job = $_POST['job'];
         $school = $_POST['school'];
         $hobby = $_POST['hobby'];
-        $pic = $_POST['pic'];
         $userID = $_GET['user_id'];
-        $user->addDetails($address,$age,$gender,$likeGender,$job,$school,$hobby,$userID);
+        $pic = $_FILES['pic']['name'];
+        // echo count($pic);
+        // var_dump($_FILES);
+        $result = $user->addDetails($address,$age,$gender,$likeGender,$job,$school,$hobby,$userID,$pic);
 
-        // $pic = $_FILES['pic']['name'];
 
-        // $target_dir = "../upload/";
-        // $target_file = $target_dir . basename($_FILES["pic"]["name"]);
+
+        $target_dir = "../upload/";
+        $target_file = $target_dir.basename($_FILES["pic"]["name"]);
 
         // $result = $user->uploadPhoto($pic);
-
-        // if($result == 1){
-        //     move_uploaded_file($_FILES['pic']['tmp_name'],$target_file);
-        // }else{
-        //     echo 'Error';
-        // }
+        if($result == 1){
+            move_uploaded_file($_FILES['pic']['tmp_name'],$target_file);
+        }else{
+            echo 'Error';
+        }
     }
     elseif(isset($_POST['skip'])){
         $user->skipDetails();
@@ -48,14 +49,14 @@
     elseif(isset($_POST['login'])){
         $email = $_POST['email'];
         $password = md5($_POST['password']);
-
+        
         $login = $user->login($email,$password);
         if ($login) {
-            $_SESSION['account_id'] = $login['id'];
+            // $_SESSION['user_id'] = $login['id'];
             if ($login['status'] == 'A') {
                 header('Location: ../views/adminTop.php');
             } else {
-                header('Location: ../views/dashboard.php');
+                header("Location: ../views/dashboard.php");
             }
         } else {
             echo "Incorrect Email and Password";

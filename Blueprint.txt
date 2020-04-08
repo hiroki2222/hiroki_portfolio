@@ -2,9 +2,9 @@ Page
  Registration
   - Login
      -user top(index)
-      -see profile
-      -edit profile
-      -delete account
+      -see your own profile
+       -edit profile
+       -delete account
       -form page
       -people who you matched with
        - message page

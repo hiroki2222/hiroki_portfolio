@@ -25,15 +25,17 @@
                       <label for="email">username</label>
                       <input type="text" name="username" id="username" class="form-control" placeholder="Enter Username" required>
                   </div>
-                  <div class="form-group display-4 mt-5">
-                      <label for="email">Email</label>
+                  <div class="form-group mt-5">
+                      <label for="email" class="display-4">Email</label>
                       <input type="text" name="email" id="email" class="form-control" placeholder="Enter Email" required>
                         <?php 
-                        //  if($_SESSION['duplicate_error'] == TRUE): ?>
-                        <!-- // <p>the email address already exists</p> -->
-                        <?php 
-                            // endif; 
-                        ?>
+                            if(isset($_POST['register'])):
+                                if($_SESSION['duplicate_error'] == TRUE): ?>
+                                <p class="text-danger font-weight-bold">The email address is already taken</p>
+                            
+                        <?php endif;
+                            endif; ?>
+
                   </div>
                   <div class="form-group display-4 mt-5">
                       <label for="password">Password</label>
