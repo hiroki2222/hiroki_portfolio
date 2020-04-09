@@ -66,9 +66,9 @@
             $sql = "SELECT * FROM accounts WHERE email='$email' AND password='$password'";
             $result = $this->conn->query($sql);
             if($result->num_rows==1){
-                $user = $result->fetch_assoc();
-                $_SESSION['user_id'] = $user['id'];
-                return TRUE;
+                return $result->fetch_assoc();
+                // $_SESSION['user_id'] = $user['id'];
+                // return TRUE;
             }else{
                 return FALSE;
             }
@@ -80,10 +80,11 @@
             $result = $this->conn->query($sql);
             $loggedInUserID = $_SESSION['user_id'];
             $loggedInUser = $this->getOneUser($loggedInUserID);
+            $gender = $loggedInUser['gender'];
             $likeGender = $loggedInUser['like_gender'];
             while($oneUserData = $result->fetch_assoc()){
                 // put only the gender you like excluding yourself into the array
-                if($oneUserData['gender'] == $likeGender && $oneUserData['user_id'] != $loggedInUserID){
+                if($oneUserData['gender'] == $likeGender && $oneUserData['like_gender'] == $gender && $oneUserData['user_id'] != $loggedInUserID){
                     $allIDArray[] = $oneUserData['user_id'];
                 }
             }
@@ -114,6 +115,25 @@
                 return $result->fetch_assoc();
             }else{
                 echo 'No User Found';
+            }
+        }
+        public function editUser($address,$likeGender,$job,$school,$hobby,$pic,$userID){
+            $sql = "UPDATE users SET address='$address',like_gender='$likeGender',job='$job',school='$school',hobby='$hobby',user_image1='$pic' WHERE user_id = '$userID'";
+            $result = $this->conn->query($sql);
+
+            if($result == FALSE){
+                echo  'CANNOT EDIT PROFILE'. $this->conn->error;
+            }else{
+                return TRUE;
+            }
+        }
+        public function deleteUser($userID){
+            $sql = "DELETE users,accounts FROM users JOIN accounts ON users.user_id = accounts.id WHERE user_id = '$userID'";
+            $result = $this->conn->query($sql);
+            if($result == FALSE){
+                echo 'CANNOT DELETE ACCOUNT'. $this->conn->error;
+            }else{
+                header('Location:../views/index.php');
             }
         }
 

@@ -1,3 +1,10 @@
+<?php
+  include '../action/matchAction.php';
+  include '../action/userAction.php';
+  $userID = $_SESSION['user_id'];
+  $match->getAllMatches($userID);
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -13,7 +20,7 @@
       <div class="container-fluid">
           <div class="row">
               <div class="col-md-4 col-sm-2 col-xs-1">
-                  
+                  <?php print_r($matchUsers) ?>
               </div>
           </div>
       </div>

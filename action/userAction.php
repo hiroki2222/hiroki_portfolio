@@ -39,6 +39,7 @@
         // $result = $user->uploadPhoto($pic);
         if($result == 1){
             move_uploaded_file($_FILES['pic']['tmp_name'],$target_file);
+            header('Location:../views/login.php');
         }else{
             echo 'Error';
         }
@@ -52,7 +53,7 @@
         
         $login = $user->login($email,$password);
         if ($login) {
-            // $_SESSION['user_id'] = $login['id'];
+            $_SESSION['user_id'] = $login['id'];
             if ($login['status'] == 'A') {
                 header('Location: ../views/adminTop.php');
             } else {
@@ -60,6 +61,26 @@
             }
         } else {
             echo "Incorrect Email and Password";
+        }
+    }
+    elseif(isset($_POST['edit'])){
+        $address = $_POST['address'];
+        $likeGender = $_POST['like'];
+        $job = $_POST['job'];
+        $school = $_POST['school'];
+        $hobby = $_POST['hobby'];
+        $userID = $_SESSION['user_id'];
+        $pic = $_FILES['pic']['name'];
+
+        $target_dir = "../upload/";
+        $target_file = $target_dir.basename($_FILES["pic"]["name"]);
+
+        $result = $user->editUser($address,$likeGender,$job,$school,$hobby,$pic,$userID);
+        if($result == TRUE){
+            move_uploaded_file($_FILES['pic']['tmp_name'],$target_file);
+            header('Location:../views/profile.php');
+        }else{
+            echo 'Error';
         }
     }
 
