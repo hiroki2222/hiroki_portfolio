@@ -117,14 +117,14 @@
                 echo 'No User Found';
             }
         }
-        public function editUser($address,$likeGender,$job,$school,$hobby,$pic,$userID){
-            $sql = "UPDATE users SET address='$address',like_gender='$likeGender',job='$job',school='$school',hobby='$hobby',user_image1='$pic' WHERE user_id = '$userID'";
+        public function editUser($address,$likeGender,$job,$school,$hobby,$userID){
+            $sql = "UPDATE users SET address='$address',like_gender='$likeGender',job='$job',school='$school',hobby='$hobby' WHERE user_id = '$userID'";
             $result = $this->conn->query($sql);
 
             if($result == FALSE){
                 echo  'CANNOT EDIT PROFILE'. $this->conn->error;
             }else{
-                return TRUE;
+                header('Location:../views/profile.php');
             }
         }
         public function deleteUser($userID){
@@ -134,6 +134,16 @@
                 echo 'CANNOT DELETE ACCOUNT'. $this->conn->error;
             }else{
                 header('Location:../views/index.php');
+            }
+        }
+        public function updatePhoto($pic,$userID){
+            $sql = "UPDATE users SET user_image1 ='$pic' WHERE user_id = $userID";
+            $result = $this->conn->query($sql);
+
+            if($result == FALSE){
+                echo  'CANNOT UPDATE PHOTO'. $this->conn->error;
+            }else{
+                return TRUE;
             }
         }
 

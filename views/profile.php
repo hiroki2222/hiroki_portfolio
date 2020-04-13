@@ -5,6 +5,7 @@
     $loggedInUser = $user->getOneUser($userID);
     $username = $loggedInUser['username'];
     $age = $loggedInUser['age'];
+    $address = $loggedInUser['address'];
     $gender = $loggedInUser['gender'];
     $likeGender = $loggedInUser['like_gender'];
     $job = $loggedInUser['job'];
@@ -53,6 +54,11 @@
             <!-- <img src="../img/ninja.png" alt="" class="d-block mx-auto"> -->
             <div >
               <img src="../upload/<?php echo $pic ?>" alt="" class="d-block mx-auto" style="height:400px; width:400px;">
+              <form action="" method="post" enctype="multipart/form-data">
+                <input type="file" name="pic" id="" class="text-center mx-auto d-block">
+                 <br>
+                <button class="btn btn-primary mx-auto d-block" name="update_photo">update the photo</button>
+              </form>
               <br>
                 <div class="col-12" style="">
                   name:<?php echo $username?>
@@ -76,10 +82,11 @@
             </div>
           </div>
           <div class="card-footer">
-              <a href="editProfile.php" class="btn btn-block">EDIT</a>
-              <br>
+              <a href="editProfile.php" class="btn btn-block">Edit Info</a>
               <hr>
-              <a href="deleteUser.php" class="btn btn-block">DELETE</a>
+              <a href="logout.php" class="btn btn-block">Logout</a>
+              <hr>
+              <a href="deleteUser.php" class="btn btn-block">Delete Account</a>
           </div>
         </div>
       </div>

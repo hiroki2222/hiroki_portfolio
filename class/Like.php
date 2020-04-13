@@ -2,9 +2,17 @@
     require_once "Database.php";
     
     class Like extends Database{
-        
+        function countLikesADay($userID){
+            $sql = "SELECT COUNT(*) AS number FROM likes WHERE user_id = '$userID' AND created_at > (NOW() - INTERVAL 1 DAY)";
+            $result = $this->conn->query($sql);
+            if($result){
+                return $result->fetch_assoc();
+            }else{
+                return 0;
+            }
+        }
         function sendLike($yourID,$receivedID){
-            $sql = "INSERT INTO likes(user_id,received_user_id)VALUES('$yourID','$receivedID')";
+            $sql = "INSERT INTO likes(user_id,received_user_id,created_at)VALUES('$yourID','$receivedID',NOW())";
             $result = $this->conn->query($sql);
             if($result == TRUE){
                 return TRUE;
@@ -23,7 +31,7 @@
                 if($addResult == TRUE){
                     return 'Match';
                 }else{
-                    echo 'CANNOT ADD THE MATCH';
+                    die('CANNOT MAKE MATCH '.$this->conn->error);
                 }
             }else{
                 return TRUE;

@@ -1,8 +1,24 @@
 <?php
-    include '../action/likeAction.php';
     include '../action/userAction.php';
-    $randUserInfo = $user->getRandomUserData();
+    include '../action/matchAction.php';
     $userID = $_SESSION['user_id'];
+    $userID2 = $_GET['user_id'];
+    $loggedInUser = $user->getOneUser($userID2);
+    $username = $loggedInUser['username'];
+    $age = $loggedInUser['age'];
+    $address = $loggedInUser['address'];
+    $gender = $loggedInUser['gender'];
+    $likeGender = $loggedInUser['like_gender'];
+    $job = $loggedInUser['job'];
+    $school = $loggedInUser['school'];
+    $hobby = $loggedInUser['hobby'];
+    $pic = $loggedInUser['user_image1'];
+
+    $match = $match->seeIfTheyreMatched($userID,$userID2);
+    
+    if($match == 0):
+        header('Location:../views/index.php');
+    else:
 ?>
 
 <!doctype html>
@@ -13,25 +29,21 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <script src="https://kit.fontawesome.com/eb83b1af77.js" crossorigin="anonymous"></script>
-
-
-
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
   <body>
-      <div class="container-fluid">
+  <div class="container-fluid">
         <div class="row">
           <div class="col-8">
-            <h1 class="display-4">(site title)</h1>
+            <h1 class="display-4"><a href="dashboard.php">(site title)</a></h1>
           </div>
           <div class="col-4">
             <div class="float-right">
-              <a href="profile.php" class="">
+              <a href="profile.php?user_id=<?php echo $userID ?>" class="">
                 <i class="fas fa-user fa-5x" style="color: pink;"></i>
               </a>
-              <a href="seeAllMatches.php" class="">
+              <a href="seeAllMatches.php?user_id=<?php echo $userID ?>" class="">
                 <i class="fas fa-heart fa-5x" style="color: pink;"></i>
             </a>
               <a href="" class="">
@@ -41,52 +53,40 @@
           </div>
         </div>
       </div>
-      <div class="container">
+  <div class="container">
         <div class="card mt-5">
           <div class="card-body">
             <!-- TO DO: show a pic which is selected randomly from database -->
             <!-- <img src="../img/ninja.png" alt="" class="d-block mx-auto"> -->
             <div >
-              <img src="../upload/<?php echo $randUserInfo['user_image1']?>" alt="" class="d-block mx-auto" style="height:400px; width:400px;">
+              <img src="../upload/<?php echo $pic ?>" alt="" class="d-block mx-auto" style="height:400px; width:400px;">
               <br>
                 <div class="col-12" style="">
-                  name:<?php echo $randUserInfo['username']?>
+                  name:<?php echo $username?>
                 </div>
                 <div class="col-12">
-                  age:<?php echo $randUserInfo['age']?>
+                  age:<?php echo $age ?>
               </div>
               <div class="col-12">
-                address:<?php echo $randUserInfo['address']?>
+                address:<?php echo $address ?>
             </div>
             
                 <div class="col-12">
-                  job:<?php echo $randUserInfo['job']?>
+                  job:<?php echo $job ?>
                 </div>
                 <div class="col-12">
-                  school:<?php echo $randUserInfo['school']?>
+                  school:<?php echo $school ?>
                 </div>
                 <div class="col-12">
-                  hobby:<?php echo $randUserInfo['hobby']?>
+                  hobby:<?php echo $hobby ?>
                 </div>
             </div>
-
-            
           </div>
-            <div class="card-footer bg-white">
-                <div class="row">
-                  <div class="col-6">
-                    <a href="dislike.php"><i class="fas fa-heart-broken fa-8x"></i></a>
-                  </div>
-                    <div class="col-6">
-                      <div class="float-right">
-                        <a href="likeclick.php"><i class="fas fa-heart fa-8x" style="color: pink;"></i></a>
-                      </div>
-                  </div>
-                </div>
-                    <div class="mx-auto text-center border-top">
-                        <a href="" class="" style="font-size: 36px;">Report <?php echo $randUserInfo['username'] ?></a> 
-                    </div>
-            </div>
+          <div class="card-footer">
+              <a href="message.php?user_id=<?php echo $userID2?>">
+                  <p class="text-center">Message</p>
+              </a>
+          </div>
         </div>
       </div>
     <!-- Optional JavaScript -->
@@ -96,3 +96,4 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   </body>
 </html>
+    <?php endif; ?>

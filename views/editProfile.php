@@ -5,6 +5,7 @@
     $loggedInUser = $user->getOneUser($userID);
     $age = $loggedInUser['age'];
     $gender = $loggedInUser['gender'];
+    $likeGender = $loggedInUser['like_gender'];
     $job = $loggedInUser['job'];
     $school = $loggedInUser['school'];
     $hobby = $loggedInUser['hobby'];
@@ -55,16 +56,25 @@
                             <div class="form-group col-md-12 mb-4">
                                 <select name="address" id="address" class="w-100 form-control">
                                     <option value="" selected disabled  class="form-control">Address</option>
-                                    <option value="japan">Japan</option>
-                                    <option value="overseas">Overseas</option>
+                                    <?php
+                                    $addresses = array(
+                                      ' 北海道 hokkaido',' 青森県 aomori',' 岩手県 iwate',' 宮城県 miyagi',' 秋田県 akita',' 山形県 yamagata',' 福島県 fukushima',' 茨城県 ibaraki',' 栃木県 tochigi',' 群馬県 gunma',' 埼玉県 saitama',' 千葉県 chiba',' 東京都 tokyo',' 神奈川県 kanagawa',' 新潟県 niigata',' 富山県 toyama',' 石川県 ishikawa',' 福井県 fukui',' 山梨県 yamanashi',' 長野県 nagano',' 岐阜県 gifu',' 静岡県 shizuoka',' 愛知県 aichi',' 三重県 mie',' 滋賀県 shiga',' 京都府 kyoto',' 大阪府 osaka',' 兵庫県 hyogo',' 奈良県 nara',' 和歌山県 wakayama',' 鳥取県 tottori',' 島根県 shimane',' 岡山県 okayama',' 広島県 hiroshima',' 山口県 yamaguchi',' 徳島県 tokushima',' 香川県 kagawa',' 愛媛県 ehime',' 高知県 kochi',' 福岡県 fukuoka',' 佐賀県 saga',' 長崎県 nagasaki',' 熊本県 kumamoto',' 大分県 oita',' 宮崎県 miyazaki',' 鹿児島県 kagoshima',' 沖縄県 okinawa','海外 overseas'
+                                    );
+                                    
+                                    foreach($addresses AS $address):
+                                    ?>
+
+                                    <option value="<?php echo $address ?>"><?php echo $address ?></option>
+
+                                    <?php endforeach; ?>
                                 </select>
                             </div>
                             <div class="form-group col-md-12 mb-4">
                                 <select name="like" id="" class="w-100 form-control">
-                                  <?php if($gender == 'm'): ?>
+                                  <?php if($likeGender == 'm'): ?>
                                     <option value="m" selected>Male</option>
                                     <option value="f">Female</option>
-                                  <?php elseif($gender == 'f'): ?>
+                                  <?php elseif($likeGender == 'f'): ?>
                                     <option value="m">Male</option>
                                     <option value="f" selected>Female</option>
                                   <?php endif;?>
@@ -80,10 +90,10 @@
                               <input type="text" name="hobby" id="" class="p-4 form-control" placeholder="Your Hobby" value="<?php echo $hobby?>">
                             </div>
                         <br>
-                        <div class="form-group col-md-12 mb-4">
+                        <!-- <div class="form-group col-md-12 mb-4">
                         <img src="../upload/<?php echo $pic?>" alt="" class="d-block mx-auto" style="height:400px; width:400px;">
                           <input type="file" name="pic" id="" class="form-control">
-                        </div>
+                        </div> -->
                         <br>
                         <div class="form-group col-md-12 mb-4">
                         </div>

@@ -2,7 +2,14 @@
   include '../action/matchAction.php';
   include '../action/userAction.php';
   $userID = $_SESSION['user_id'];
-  $match->getAllMatches($userID);
+  // echo $userID;
+  // $matchUsers = 
+  $allMatchedID = $match->getAllMatchedID($userID);
+  foreach($allMatchedID as $eachID){
+    $matchUsers[] = $user->getOneUser($eachID);
+  }
+  
+  // print_r($a);
 ?>
 
 <!doctype html>
@@ -19,9 +26,18 @@
   <body>
       <div class="container-fluid">
           <div class="row">
-              <div class="col-md-4 col-sm-2 col-xs-1">
-                  <?php print_r($matchUsers) ?>
-              </div>
+              
+              <?php foreach($matchUsers as $matchUser): ?>
+                <div class="col-4">
+                  <a href="matchProfile.php?user_id=<?php echo $matchUser['user_id']?>">
+                    <div class="col-md-4 col-sm-2 col-xs-1">
+                        <img src="../upload/<?php echo $matchUser['user_image1']?>" alt="" style="height:200px; width:200px;">
+                        <p><?php echo $matchUser['username']; ?></p>
+                    </div>
+                  </a>
+                </div>
+              <?php endforeach; ?>
+              
           </div>
       </div>
     <!-- Optional JavaScript -->

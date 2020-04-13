@@ -70,12 +70,30 @@
         $school = $_POST['school'];
         $hobby = $_POST['hobby'];
         $userID = $_SESSION['user_id'];
+        // $pic = $_FILES['pic']['name'];
+
+        // $target_dir = "../upload/";
+        // $target_file = $target_dir.basename($_FILES["pic"]["name"]);
+
+        $result = $user->editUser($address,$likeGender,$job,$school,$hobby,$userID);
+        // if($result == TRUE){
+        //     move_uploaded_file($_FILES['pic']['tmp_name'],$target_file);
+        //     header('Location:../views/profile.php');
+        // }else{
+        //     echo 'Error';
+        // }
+    }
+    elseif(isset($_POST['update_photo'])){
         $pic = $_FILES['pic']['name'];
+        // echo $pic;
+        // echo count($pic);
+        // var_dump($_FILES);
+        $userID = $_SESSION['user_id'];
 
         $target_dir = "../upload/";
         $target_file = $target_dir.basename($_FILES["pic"]["name"]);
 
-        $result = $user->editUser($address,$likeGender,$job,$school,$hobby,$pic,$userID);
+        $result = $user->updatePhoto($pic,$userID);
         if($result == TRUE){
             move_uploaded_file($_FILES['pic']['tmp_name'],$target_file);
             header('Location:../views/profile.php');
