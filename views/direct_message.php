@@ -4,7 +4,7 @@
     include '../action/messageAction.php';
     $userID = $_SESSION['user_id'];
     $userID2 = $_GET['user_id'];
-    $loggedInUser = $user->getOneUser($userID2);
+    $loggedInUser = $user->getOneUser($userID);
     $username = $loggedInUser['username'];
 
     $match = $match->seeIfTheyreMatched($userID,$userID2);
@@ -49,10 +49,13 @@
       </div>
     <div class="container">
       <?php
-
+        $messages = $message->getMessages($userID,$userID2);
+        foreach($messages as $eachMessage):
+          print_r($eachMessage);
+        endforeach;
       ?>
       <form action="" method="post">
-        <textarea id="" cols="30" rows="10" class="form-control" name="message"></textarea>
+        <textarea id="" cols="20" rows="10" class="form-control" name="message"></textarea>
         <br>
         <button class="btn btn-outline-primary btn-block" name="send_message">Send</button>
       </form>

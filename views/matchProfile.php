@@ -83,7 +83,7 @@
             </div>
           </div>
           <div class="card-footer">
-              <a href="message.php?user_id=<?php echo $userID2?>">
+              <a href="direct_message.php?user_id=<?php echo $userID2?>">
                   <p class="text-center">Message</p>
               </a>
           </div>
