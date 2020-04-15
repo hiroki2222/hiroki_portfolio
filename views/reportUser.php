@@ -11,10 +11,18 @@
   </head>
   <body>
       <div class="container">
-          <form action="" method="post">
-              <select name="" id="" class="form-control">
-                  <option value="" class="form-control">Inappropriate Picture</option>
+          <form action="" method="post" class="mt-5 w-50 mx-auto">
+              <select name="reason" id="" class="form-control">
+                <option value="" selected disabled>Why do you report?</option>
+                  <option value="pic" class="form-control">Inappropriate Picture</option>
+                  <option value="spam" class="form-control">Feels like Spam</option>
               </select>
+              <br>
+              <textarea name="" id="" cols="30" rows="10" class="form-control" name="details">
+
+              </textarea>
+              <br>
+              <button type="submit" class="btn btn-primary btn-block btn-lg">Send</button>
           </form>
       </div>
     <!-- Optional JavaScript -->

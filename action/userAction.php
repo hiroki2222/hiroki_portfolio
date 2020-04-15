@@ -15,6 +15,8 @@
         }elseif($check == FALSE){
             // echo "ACCOUNT CREATED";
             $user->createAccount($username,$email,$password);
+            header('Location:../views/index.php');
+            exit();
         }
     }
     elseif(isset($_POST['add'])){
@@ -25,7 +27,8 @@
         $job = $_POST['job'];
         $school = $_POST['school'];
         $hobby = $_POST['hobby'];
-        $userID = $_GET['user_id'];
+        // $userID = $_GET['user_id'];
+        $userID = $_SESSION['registered_id'];
         $pic = $_FILES['pic']['name'];
         // echo count($pic);
         // var_dump($_FILES);
@@ -57,6 +60,7 @@
             if ($login['status'] == 'A') {
                 header('Location: ../views/adminTop.php');
             } else {
+                $user->updateLoginTimes($_SESSION['user_id']);
                 header("Location: ../views/dashboard.php");
             }
         } else {

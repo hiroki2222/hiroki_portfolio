@@ -12,7 +12,6 @@
     if($match == 0):
         header('Location:../views/index.php');
     else:
-      
 ?>
 
 <!doctype html>
@@ -50,10 +49,21 @@
     <div class="container">
       <?php
         $messages = $message->getMessages($userID,$userID2);
-        foreach($messages as $eachMessage):
-          print_r($eachMessage);
-        endforeach;
-      ?>
+        foreach($messages as $eachMessage): ?>
+
+        <div class="row">
+          <div class="col-2">
+            <img src="../upload/<?php echo $eachMessage['user_image1']?>" alt="" style="height:80px; width:80px;" class="">
+          </div>
+          <div class="col-6">
+            <p class="text-break"><?php echo $eachMessage['textmessage']?></p>
+          </div>
+          <div class="col-4">
+            <p class="float-right"><?php echo $eachMessage['created_at'] ?></p>
+          </div>
+        </div>
+        <br>
+       <?php endforeach; ?>
       <form action="" method="post">
         <textarea id="" cols="20" rows="10" class="form-control" name="message"></textarea>
         <br>

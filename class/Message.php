@@ -6,23 +6,23 @@
 
             $result = $this->conn->query($sql);
             if($result == TRUE){
-                return TRUE;
+                // header("Location: " . $_SERVER['PHP_SELF']);
             }else{
                 die('cannot send message '.$this->conn->error);
             }
         }
         function getMessages($userID,$receivedID){
-            $sql = "SELECT u.username,u.user_image1,m.textmessage FROM users u,messages m WHERE u.user_id = m.user_id AND ((m.user_id = $userID AND m.received_user_id = $receivedID) OR (m.user_id = $receivedID AND m.received_user_id = $userID))";
+            $sql = "SELECT u.username,u.user_image1,m.textmessage,m.created_at FROM users u,messages m WHERE u.user_id = m.user_id AND ((m.user_id = $userID AND m.received_user_id = $receivedID) OR (m.user_id = $receivedID AND m.received_user_id = $userID))";
             // echo $sql;
             $result = $this->conn->query($sql);
  
             if($result->num_rows > 0){
                 $dataHolder = array();
                 while($tableData = $result->fetch_assoc()){
-                    $dataHolder = $tableData;
+                    $dataHolder[] = $tableData;
                 }
-                // return $dataHolder;
-                print_r($dataHolder);
+                return $dataHolder;
+                // print_r($dataHolder);
             }else{
                 return 'error';
             }

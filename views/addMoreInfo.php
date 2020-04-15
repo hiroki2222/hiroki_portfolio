@@ -12,17 +12,52 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Gotu&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+      input,select,option {
+        height: 50px !important;
+      }
+      
+    </style>
+    <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script>
+    $(function(){
+      $('#myfile').change(function(e){
+        //ファイルオブジェクトを取得する
+        var file = e.target.files[0];
+        var reader = new FileReader();
+    
+        //画像でない場合は処理終了
+        if(file.type.indexOf("image") < 0){
+          alert("画像ファイルを指定してください。");
+          return false;
+        }
+    
+        //アップロードした画像を設定する
+        reader.onload = (function(file){
+          return function(e){
+            $("#img1").attr("src", e.target.result);
+            $("#img1").attr("title", file.name);
+          };
+        })(file);
+        reader.readAsDataURL(file);
+    
+          });
+        });
+    </script>
   </head>
   <body>
+    <a href="index.php" id="logo"><img src="../image/logo.png" alt=""></a>
     <div class="container">
-          <div class="card mx-auto w-50 my-5 border border-0">
+          <div class="card mx-auto my-5 border border-0">
               <div class="card-header bg-white text-dark border-0">
-                  <h2 class="text-center">Add More Info</h2>
+                  <h2 class="text-center display-4">Add More Info</h2>
               </div>
               <div class="card-body">
                   <form action="" method="post" enctype="multipart/form-data">
                       <div class="form-row">
-                            <div class="form-group col-md-12 mb-4">
+                            <div class="form-group col-md-6 col-sm-12 col-xs-12 mb-4">
                                 <select name="address" id="address" class="w-100 form-control">
                                     <option value="" selected disabled  class="form-control">Address</option>
                                     <?php
@@ -38,30 +73,30 @@
                                     <?php endforeach; ?>
                                 </select>
                             </div>
-                            <div class="form-group col-md-12 mb-4">
+                            <div class="form-group col-md-6 col-sm-12 col-xs-12 mb-4">
                               <input type="number" name="age" id="age" class="p-4 form-control" placeholder="age">
                             </div>
-                            <div class="form-group col-md-12 mb-4">
+                            <div class="form-group col-md-6 col-sm-12 col-xs-12 mb-4">
                                 <select name="gender" id="" class="w-100 form-control">
                                     <option value="" selected disabled  class="form-control">Gender</option>
                                     <option value="m">Male</option>
                                     <option value="f">Female</option>
                                 </select>
                             </div>
-                            <div class="form-group col-md-12 mb-4">
+                            <div class="form-group col-md-6 col-sm-12 col-xs-12 mb-4">
                                 <select name="like" id="" class="w-100 form-control">
                                     <option value="" selected disabled  class="form-control">Like</option>
                                     <option value="m">Male</option>
                                     <option value="f">Female</option>
                                 </select>
                             </div>
-                            <div class="form-group col-md-12 mb-4">
+                            <div class="form-group col-md-6 col-sm-12 col-xs-12 mb-4">
                               <input type="text" name="job" id="job" class="p-4 form-control" placeholder="job">
                             </div>
-                            <div class="form-group col-md-12 mb-4">
+                            <div class="form-group col-md-6 col-sm-12 col-xs-12 mb-4">
                               <input type="text" name="school" id="school" class="p-4 form-control" placeholder="school">
                             </div>
-                            <div class="form-group col-md-12 mb-4">
+                            <div class="form-group col-md-12 col-sm-12 col-xs-12 mb-4">
                               <input type="text" name="hobby" id="" class="p-4 form-control" placeholder="Your Hobby">
                               <!-- <a data-toggle="collapse" href="#oneMoreHobby" aria-expanded="false" aria-controls="oneMoreHobby">
                               <i class="fas fa-plus-circle"></i>
@@ -69,18 +104,21 @@
                             </div> -->
                             </div>
                         <br>
-                        <div class="form-group col-md-12 mb-4">
-                          <input type="file" name="pic" id="" class="form-control">
+                        
+                        <div class="form-group col-12 mb-4">
+                          <textarea name="" id="" cols="40" rows="10" class="form-control"></textarea>
                         </div>
                         <br>
-                        <div class="form-group col-md-12 mb-4">
+                        <div class="form-group col-md-12   mb-4">
+                          <input type="file" name="pic" id="myfile" class="form-control">
+                          <img src="" alt="" id="img1" style="width:300px;height:300px;">
                         </div>
                         <br>
                         <div class="form-group col-md-12">
-                              <button type="submit" class="btn btn-dark form-control text-uppercase" name="add">Add</button>
+                              <button type="submit" class="btn alert-success form-control text-uppercase btn-lg" name="add">Add</button>
                         </div>
                         <div class="form-group col-md-12">
-                              <button type="submit" class="btn btn-dark form-control text-uppercase" name="skip">Skip</button>
+                              <button type="submit" class="btn alert-warning form-control text-uppercase btn-lg" name="skip">Skip</button>
                         </div>
                       </div>
                   </form>

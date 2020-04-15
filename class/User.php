@@ -29,9 +29,11 @@
                     $sql = "SELECT LAST_INSERT_ID()";
                     $result = $this->conn->query($sql);
                     $userIDArray = $result->fetch_assoc();
+                    $_SESSION['registered_id'] = $userIDArray['LAST_INSERT_ID()'];
                     // print_r($userIDArray);
-                    $userID = $userIDArray['LAST_INSERT_ID()'];
-                    header("location:../views/addMoreInfo.php?user_id=$userID");
+                    // $userID = $userIDArray['LAST_INSERT_ID()'];
+                    // header("location:../views/addMoreInfo.php?user_id=$userID");
+                    // header("location:../views/addMoreInfo.php");
                 }
             }
 
@@ -69,6 +71,27 @@
                 return $result->fetch_assoc();
                 // $_SESSION['user_id'] = $user['id'];
                 // return TRUE;
+            }else{
+                return FALSE;
+            }
+        }
+
+        public function updateLoginTimes($userID){
+            $sql = "UPDATE accounts SET login_times = login_times + 1 WHERE id = $userID";
+            $result = $this->conn->query($sql);
+            if($result->num_rows>0){
+                return TRUE;
+            }else{
+                return FALSE;
+            }
+        }
+
+        public function getLoginTimes($userID){
+            $sql = "SELECT login_times FROM accounts WHERE id = $userID";
+            $result = $this->conn->query($sql);
+            if($result->num_rows>0){
+                $loginTimesArray = $result->fetch_assoc();
+                $_SESSION['login_times'] = $loginTimesArray['login_times'];
             }else{
                 return FALSE;
             }

@@ -3,7 +3,11 @@
     include '../action/userAction.php';
     $randUserInfo = $user->getRandomUserData();
     $userID = $_SESSION['user_id'];
-?>
+    $user->getLoginTimes($userID);
+    $loginTimes = $_SESSION['login_times'];
+    if($loginTimes == 1):
+    header('Location:addMoreInfo.php');
+     endif; ?>
 
 <!doctype html>
 <html lang="en">

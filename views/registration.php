@@ -12,11 +12,17 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        body{
+            background-color:#EEE;
+        }
+    </style>
   </head>
   <body class="">
   <div class="container-fluid">
-      <div class="display-2 text-center mt-5">
-          Registration
+      <div class="text-center mt-5">
+          <h1 class="display-2">Registration</h1>
       </div>
       <div class="w-50 mx-auto mt-5">
           <!-- <div class="card-body"> -->
@@ -41,7 +47,7 @@
                       <label for="password">Password</label>
                       <input type="password" name="password" id="password" class="form-control" placeholder="Enter Password" required>
                   </div>
-                  <button class="btn btn-block btn-lg mt-5 btn-outline-info" name="register">Register</button>
+                  <button class="btn btn-block btn-lg mt-5 btn-outline-info" name="registe">Register</button>
               </form>
           <!-- </div>    -->
       </div>
