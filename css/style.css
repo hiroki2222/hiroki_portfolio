@@ -1,23 +1,243 @@
+/* for top message*/
 @import url('https://fonts.googleapis.com/css?family=Gotu&display=swap');
 
+/* fot tab */
+@import url('https://fonts.googleapis.com/css?family=Bebas+Neue&display=swap');
+
+/* for nav bar (tinder font) */
+@font-face{
+    font-family: 'Charlet';
+    src: url('../font/chalet-new-york-nineteen-seventy.otf');
+}
+
+/* for profile */
+@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+
+.main_bg_color{
+    background-color: #E9EBEE;
+}
+
+ /* nav bar white ver*/
+/* .nav_design{
+    background-color: white;
+    border-bottom: 1px solid #B1CECC;
+}
+.nav_letters{
+    color: #3b5998;
+    font-family: 'Charlet', sans-serif !important;
+} */
+
+/* nav bar blue ver*/
+/* .nav_design{
+    background-color: #3b5998; 
+    border-bottom: 1px solid #B1CECC;
+} */
+/* .navbar-toggler{
+    border-color: #3b5998;
+    background-color: #3b5998;
+  } */
+
+
+/* nav bar red ver */
+.nav_design{
+    background-color: #b94047;
+    border-bottom: 1px solid #B1CECC;
+}
+.nav_letters{
+    color: white;
+    font-family: 'Charlet', sans-serif !important;
+}
+
+.nav_page_letter:hover{
+    color:black;
+    text-decoration: none;
+}
+
+.navbar-toggler{
+    border:none;
+}
+.navbar-toggler .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255,1)' stroke-width='3' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+  }
+
+
 #logo{
-    font-size: 48px !important;
+    font-size: 40px;
 }
-body{
-    font-family: 'Gotu', sans-serif;
-    color: red;
-    background:url("../image/background.jpg") no-repeat center center;
-    background-position: center center;
-
-    /* 画像をタイル状に繰り返し表示しない */
-    background-repeat: no-repeat;
-    
-    /* コンテンツの高さが画像の高さより大きい時、動かないように固定 */
-    background-attachment: fixed;
-    
-    /* 表示するコンテナの大きさに基づいて、背景画像を調整 */
-    background-size: cover;
-    background-color:rgba(255,255,255,0.15);
-    background-blend-mode:lighten;
+#logo:hover{
+    text-decoration: none;
+    color: white;
+}
+#header{
+    background-color: #F1D4E7;
 }
 
+#sidebar{
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+.card{
+    color:#3b5998;
+}
+
+.top_message{
+    font-family:'Gotu', sans-serif;
+    color:#3b5998;
+    color:white;
+}
+
+input,select,option {
+    height: 50px !important;
+  }
+
+h2{
+    letter-spacing: .06em;
+}
+.top_link{
+    opacity:.6;
+}
+
+.bg-color {
+    /* background-color: #F9ADBB !important; */
+    background-color: #E1E3E4 !important;
+    /* background-color: #F9E3EC !important; */
+
+}
+
+.tabname{
+    color: black;
+    font-family: 'Bebas Neue', cursive;
+    /* font-size: 18px; */
+    /* letter-spacing: .2em; */
+}
+
+.tab-pane a{
+    color: black;
+}
+.tab-pane a:hover{
+    text-decoration: none;
+}
+.message_user{
+    font-size: 12px;
+}
+.img_box{
+    width: 100%;
+    padding-top: 125%;
+    position: relative;
+}
+
+.profile_pic{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+}
+.info{
+    font-size: 16px !important;
+    letter-spacing: .03em;
+}
+/* @media (min-width: 768px) {
+    .profile_sec {
+        margin-top:40px;
+    }
+    } */
+/* a:hover{
+    text-decoration: none;
+} */
+/* .card{
+    background-color: #fffafa !important;
+} */
+
+/* .navbar_color{
+    background-color: white;
+} */
+
+.btn-blue,
+.btn-blue.disabled, .btn-blue:disabled {
+  color: #fff;
+  background-color: #3b5998;
+  border-color: #3b5998;
+}
+
+/* focusされた時の枠線の色 */
+.btn-blue:focus, .btn-blue.focus,
+.btn-blue:not(:disabled):not(.disabled):active:focus, .btn-blue:not(:disabled):not(.disabled).active:focus,
+.show > .btn-blue.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.9);
+}
+
+/* hover時（マウスカーソルを重ねた時）の色（通常より濃いor暗めの色を指定） */ 
+.btn-blue:hover {
+  color: #fff;
+  background-color: #3b59a9;
+  border-color: #3b59a9;
+}
+
+ /* active時の色（hover時と同等かさらに濃いor暗めの色を指定） */ 
+.btn-blue:not(:disabled):not(.disabled):active, .btn-blue:not(:disabled):not(.disabled).active,
+.show > .btn-blue.dropdown-toggle {
+  color: #fff;
+  background-color: #3b59c9;
+  border-color: #3b59c9;
+}
+
+
+
+.btn-red,
+.btn-red.disabled, .btn-red:disabled {
+  color: #fff;
+  background-color: #b94047;
+  border-color: #b94047;
+}
+
+/* focusされた時の枠線の色 */
+.btn-red:focus, .btn-red.focus,
+.btn-red:not(:disabled):not(.disabled):active:focus, .btn-red:not(:disabled):not(.disabled).active:focus,
+.show > .btn-red.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(230, 154, 154, 0.9);
+}
+
+/* hover時（マウスカーソルを重ねた時）の色（通常より濃いor暗めの色を指定） */ 
+.btn-red:hover {
+  color: #fff;
+  background-color: #c7363e;
+  border-color: #c7363e;
+}
+
+ /* active時の色（hover時と同等かさらに濃いor暗めの色を指定） */ 
+.btn-red:not(:disabled):not(.disabled):active, .btn-red:not(:disabled):not(.disabled).active,
+.show > .btn-red.dropdown-toggle {
+  color: #fff;
+  background-color: #a82f35;
+  border-color: #a82f35;
+}
+
+
+.btn-grey,
+.btn-grey.disabled, .btn-grey:disabled {
+  color: #fff;
+  background-color: #696969;
+  border-color: #696969;
+}
+
+/* focusされた時の枠線の色 */
+.btn-grey:focus, .btn-grey.focus,
+.btn-grey:not(:disabled):not(.disabled):active:focus, .btn-grey:not(:disabled):not(.disabled).active:focus,
+.show > .btn-grey.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(131, 125, 125, 0.9);
+}
+
+/* hover時（マウスカーソルを重ねた時）の色（通常より濃いor暗めの色を指定） */ 
+.btn-grey:hover {
+  color: #fff;
+  background-color: #5e5959;
+  border-color: #5e5959;
+}
+
+ /* active時の色（hover時と同等かさらに濃いor暗めの色を指定） */ 
+.btn-grey:not(:disabled):not(.disabled):active, .btn-grey:not(:disabled):not(.disabled).active,
+.show > .btn-grey.dropdown-toggle {
+  color: #fff;
+  background-color: #524f4f;
+  border-color: #524f4f;
+}

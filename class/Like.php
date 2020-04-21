@@ -38,6 +38,19 @@
             }
         }
 
+        function getOnesLikes($userID){
+            $sql = "SELECT received_user_id FROM likes WHERE user_id = $userID";
+            $result = $this->conn->query($sql);
+            if($result->num_rows>0){
+                while($tableData = $result->fetch_assoc()){
+                    $dataHolder[] = $tableData;
+                }
+                return $dataHolder;
+            }else{
+                return FALSE;
+            }
+        }
+
     }
     
 ?>

@@ -16,7 +16,6 @@ Database(portfolio)
  Table
   - accounts (account_id/username/email/password)
   - user (user_id/username/address/age/gender/like/job/school/hobby1/hobby2/hobby3/user_image1/user_image2/user_image3)
-  - deletedAccount (deleted_account_id/email)
   - likes (sent_user_id/received_user_id)
 
 Function

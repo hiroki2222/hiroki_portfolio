@@ -12,10 +12,10 @@
         if($sendLike){
             $checkLike = $like->checkLike($receivedUserID,$userID);
             if($checkLike){
-                if($likesADay == 4){
-                    $_SESSION['wait'] == 'wait';
-                    header('Location:dashboard.php');
-                }
+                // if($likesADay == 4){
+                //     $_SESSION['wait'] == 'wait';
+                //     header('Location:dashboard.php');
+                // }
                 header('Location:dashboard.php');
             }
         }

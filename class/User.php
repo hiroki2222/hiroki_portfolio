@@ -17,9 +17,9 @@
                 return FALSE;
             }
         }
-        public function createAccount($username,$email,$password){
+        public function createAccount($username,$gender,$email,$password){
                 $createAccount = "INSERT INTO accounts(email,password)VALUES('$email','$password')";
-                $createUser = "INSERT INTO users(username)VALUES('$username')";
+                $createUser = "INSERT INTO users(username,gender)VALUES('$username','$gender')";
                 $newAccount = $this->conn->query($createAccount);
                 $newUser = $this->conn->query($createUser);
                 if($newAccount == FALSE || $newUser == FALSE){
@@ -29,7 +29,7 @@
                     $sql = "SELECT LAST_INSERT_ID()";
                     $result = $this->conn->query($sql);
                     $userIDArray = $result->fetch_assoc();
-                    $_SESSION['registered_id'] = $userIDArray['LAST_INSERT_ID()'];
+                    // $_SESSION['registered_id'] = $userIDArray['LAST_INSERT_ID()'];
                     // print_r($userIDArray);
                     // $userID = $userIDArray['LAST_INSERT_ID()'];
                     // header("location:../views/addMoreInfo.php?user_id=$userID");
@@ -37,21 +37,21 @@
                 }
             }
 
-        public function addDetails($address,$age,$gender,$likeGender,$job,$school,$hobby,$userID,$pic){
-            $sql = "UPDATE users SET address = '$address', age ='$age',gender = '$gender', like_gender='$likeGender', job = '$job', school = '$school', hobby = '$hobby',user_image1 = '$pic' WHERE user_id = '$userID'";
+        public function addDetails($address,$age,$likeGender,$job,$school,$hobby,$profileMessage,$userID){
+            $sql = "UPDATE users SET address = '$address', age ='$age', like_gender='$likeGender', job = '$job', school = '$school', hobby = '$hobby',profile_comment = '$profileMessage' WHERE user_id = '$userID'";
             $result = $this->conn->query($sql);
 
             if($result == FALSE){
                 die('CANNOT ADD INFO: '.$this->conn->error);
             }else{
-                // header('Location:../views/login.php');
+                // header('Location:../views/dashboard.php');
                 return 1;
             }
         }
 
-        public function skipDetails(){
-            header ('Location:../views/login.php');
-        }
+        // public function skipDetails(){
+        //     header ('Location:../views/login.php');
+        // }
 
         public function login($email, $password){
             // $sqlResult = $this->conn->prepare('SELECT * FROM accounts WHERE email =? AND password=?');
@@ -68,7 +68,7 @@
             $sql = "SELECT * FROM accounts WHERE email='$email' AND password='$password'";
             $result = $this->conn->query($sql);
             if($result->num_rows==1){
-                return $result->fetch_assoc();
+                return  $result->fetch_assoc();
                 // $_SESSION['user_id'] = $user['id'];
                 // return TRUE;
             }else{
@@ -91,36 +91,48 @@
             $result = $this->conn->query($sql);
             if($result->num_rows>0){
                 $loginTimesArray = $result->fetch_assoc();
-                $_SESSION['login_times'] = $loginTimesArray['login_times'];
+                return $loginTimesArray['login_times'];
             }else{
                 return FALSE;
             }
         }
 
-        public function getRandomUserData(){
-
-            $sql = "SELECT * FROM users";
+        public function getRandomUserData($displayedUsersArray){
+            if($displayedUsersArray){
+                $sql = "SELECT * FROM users WHERE user_id NOT IN (".implode(",",$displayedUsersArray).");";
+            }else{
+                $sql = "SELECT * FROM users";
+            }
             $result = $this->conn->query($sql);
             $loggedInUserID = $_SESSION['user_id'];
             $loggedInUser = $this->getOneUser($loggedInUserID);
             $gender = $loggedInUser['gender'];
             $likeGender = $loggedInUser['like_gender'];
-            while($oneUserData = $result->fetch_assoc()){
-                // put only the gender you like excluding yourself into the array
-                if($oneUserData['gender'] == $likeGender && $oneUserData['like_gender'] == $gender && $oneUserData['user_id'] != $loggedInUserID){
-                    $allIDArray[] = $oneUserData['user_id'];
+            if($result->num_rows>0){
+                while($oneUserData = $result->fetch_assoc()){
+                    // put only the gender you like excluding yourself into the array
+                    if($oneUserData['gender'] == $likeGender && $oneUserData['like_gender'] == $gender && $oneUserData['user_id'] != $loggedInUserID){
+                        $allIDArray[] = $oneUserData['user_id'];
+                    }
                 }
+                //  from the array one is chosen randomly
+                if(is_null($allIDArray)){
+                    $_SESSION['no_user'] = 'no_user';
+                    return $_SESSION['no_user'];
+                }else{
+                    $randUserKey = array_rand($allIDArray);
+                    $randUserID = $allIDArray[$randUserKey];
+                    $_SESSION['selected_id'] = $randUserID;
+                    if($randUserID > 0){
+                        return $this->getOneLIke($randUserID,$likeGender);
+                    }else{
+                        return FALSE;
+                    }
             }
-            //  from the array one is chosen randomly
-            $randUserKey = array_rand($allIDArray);
-            $randUserID = $allIDArray[$randUserKey];
-            $_SESSION['selected_id'] = $randUserID;
-            if($randUserID > 0){
-                $displayUser = $this->getOneLIke($randUserID,$likeGender);
-                return $displayUser;
             }else{
-                return FALSE;
+                echo 'error';
             }
+            
         }
         public function getOneUser($userID){
             $sql = "SELECT * FROM users WHERE user_id = $userID";
@@ -140,16 +152,16 @@
                 echo 'No User Found';
             }
         }
-        public function editUser($address,$likeGender,$job,$school,$hobby,$userID){
-            $sql = "UPDATE users SET address='$address',like_gender='$likeGender',job='$job',school='$school',hobby='$hobby' WHERE user_id = '$userID'";
-            $result = $this->conn->query($sql);
+        // public function editUser($address,$likeGender,$job,$school,$hobby,$userID){
+        //     $sql = "UPDATE users SET address='$address',like_gender='$likeGender',job='$job',school='$school',hobby='$hobby' WHERE user_id = '$userID'";
+        //     $result = $this->conn->query($sql);
 
-            if($result == FALSE){
-                echo  'CANNOT EDIT PROFILE'. $this->conn->error;
-            }else{
-                header('Location:../views/profile.php');
-            }
-        }
+        //     if($result == FALSE){
+        //         echo  'CANNOT EDIT PROFILE'. $this->conn->error;
+        //     }else{
+        //         header('Location:../views/profile.php');
+        //     }
+        // }
         public function deleteUser($userID){
             $sql = "DELETE users,accounts FROM users JOIN accounts ON users.user_id = accounts.id WHERE user_id = '$userID'";
             $result = $this->conn->query($sql);
@@ -167,6 +179,18 @@
                 echo  'CANNOT UPDATE PHOTO'. $this->conn->error;
             }else{
                 return TRUE;
+            }
+        }
+        public function getAllUsers(){
+            $sql = "SELECT * FROM users";
+            $result = $this->conn->query($sql);
+            if($result->num_rows > 0){
+                while($tableData = $result->fetch_assoc()){
+                $dataHolder[] = $tableData;
+            }
+                return $dataHolder;
+            }else{
+                die("No record Found: ".$this->conn->error);
             }
         }
 

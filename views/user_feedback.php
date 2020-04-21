@@ -1,3 +1,8 @@
+<?php
+    include '../action/contactAction.php';
+    $allContacts = $contact->getAllContacts();
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -12,46 +17,62 @@
     <link rel="stylesheet" href="../css/admin.css">
   </head>
   <body>
-  <nav class="navbar navbar-expand-lg navbar-dark static-top nav_design p-0" id="navheight">
-          <a class="nav_letters mt-3 ml-2" href="index.php" id="logo">
-            theRightOne
-          </a>
+  <nav class="navbar navbar-expand-lg navbar-dark static-top nav_design">
+    <a class="mt-3 ml-2 nav_letters" href="#" id="logo">
+      theRightOne
+    </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
-      <ul class="navbar-nav ml-auto mt-4 text-center" style="font-size: 18px;">
+      <ul class="navbar-nav ml-auto mt-4" style="font-size: 18px;">
         <li class="nav-item mr-5">
-          <a class="nav_letters nav_page_letter" href="dashboard.php"><i class="fas fa-home"></i>Home
+          <a class="nav_letters nav_page_letter" href="dashboard.php">About Us
                 <span class="sr-only">(current)</span>
               </a>
         </li>
         <li class="nav-item mr-5">
-          <a class="nav_letters nav_page_letter" href="profile.php"><i class="fas fa-user"></i>Profile</a>
+          <a class="nav_letters nav_page_letter" href="profile.php">Contact</a>
         </li>
         <li class="nav-item mr-5">
-          <a class="nav_letters nav_page_letter" href="seeAllMatches.php"><i class="fas fa-heart"></i>Matches</a>
+          <a class="nav_letters nav_page_letter" href="seeAllMatches.php">Language</a>
         </li>
-        <li class="nav-item mr-5">
-          <a class="nav_letters nav_page_letter" href="contact.php"><i class="fas fa-envelope"></i>Contact</a>
+        <li class="nav-item">
+          <a class="nav_letters nav_page_letter" href="contact.php">Jobs</a>
         </li>
       </ul>
     </div>
 </nav>
-
-<div class="container-fluid mt-5">
-    <div class="card w-50 mx-auto">
-        <div class="card-header text-center">
-            Admin Menu
-        </div>
-        <div class="card-body">
-            <ul>
-            <a href="user_list.php"><li class="menu-list">User List</li></a>
-            <a href="user_feedback.php"><li class="menu-list">User Feedback</li></a>
-            <!-- <a href="settings.php"><li class="menu-list">Change the Settings</li></a> -->
-            </ul>
-        </div>
-    </div>
+<div class="container-fluid">
+    <table class="mx-auto table-bordered table-striped mt-5 table-hover w-75">
+        <thead>
+            <tr>
+                <th>MessageID</th>
+                <th>UserID</th>
+                <th>ReportedID</th>
+                <th>Category</th>
+                <th>Subject</th>
+                <th>Message</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+                foreach($allContacts as $eachContact):
+            ?>
+            
+            <tr>
+                <td><?php echo $eachContact['contact_id']?></td>
+                <td><?php echo $eachContact['user_id'] ?></td>
+                <td><?php echo $eachContact['reported_id'] ?></td>
+                <td><?php echo $eachContact['category'] ?></td>
+                <td><?php echo $eachContact['title'] ?></td>
+                <td><?php echo $eachContact['content']?></td>
+            </tr>
+            <?php
+                endforeach;
+            ?>
+        </tbody>
+    </table>
 </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

@@ -1,11 +1,10 @@
 <?php
+    include '../action/likeAction.php';
     include '../action/userAction.php';
     include '../action/matchAction.php';
-    include '../action/matchAction.php';
-    include '../action/messageAction.php'; 
-    $userID = $_SESSION['user_id'];
-    $userID2 = $_GET['user_id'];
-    $loggedInUser = $user->getOneUser($userID2);
+    include '../action/messageAction.php';  
+    $userID = $_POST['user_id'];
+    $loggedInUser = $user->getOneUser($userID);
     $username = $loggedInUser['username'];
     $age = $loggedInUser['age'];
     $address = $loggedInUser['address'];
@@ -16,38 +15,7 @@
     $hobby = $loggedInUser['hobby'];
     $pic = $loggedInUser['user_image1'];
     $userMessage = $loggedInUser['profile_comment'];
-    $allMatchedID = $match->getAllMatchedID($userID);
-    if($allMatchedID){
-      foreach($allMatchedID as $eachID){
-        $matchUsers[] = $user->getOneUser($eachID);
-      }
-      $messageArray = array();
-      $textTimeArray = array();
-      $messageValueArray = array();
-      foreach($matchUsers as $matchUser){
-        $matchUserID = $matchUser['user_id'];
-        $latestMessages = $message->getTheLatestMessage($userID,$matchUserID);
-        // print_r($latestMessages);
-        if($latestMessages){
-          array_push($textTimeArray,$latestMessages['created_at']);
-          // array_push($messageTextArray,$latestMessages['m.textmessage']);
-          // array_push($messageUserArray,$latestMessages['u.username']);
-          // array_push($messageImgArray,$latestMessages['u.user_image1']);
-          $messageValueArray[] = array(
-                                      'user_id1' => $latestMessages['user_id'],
-                                      'user_id2' => $latestMessages['received_user_id'],
-                                      'content' => $latestMessages['textmessage'],
-          );
-        }
-      }
-      $messageArray = array_combine($textTimeArray,$messageValueArray);
-    }
 
-    $matched = $match->seeIfTheyreMatched($userID,$userID2);
-    
-    if($matched == 0):
-        header('Location:../views/index.php');
-    else:
 ?>
 
 <!doctype html>
@@ -63,31 +31,6 @@
     <link rel="stylesheet" href="../css/style.css">
     <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="js/main.js"></script>
-    <script>
-      // 画面高さ取得jquery
-      $(document).ready(function () {
-
-        hsize = $(window).outerHeight(true);
-        navheight = $("#navheight").outerHeight(true);
-        main_height = $("#main_height").outerHeight(true);
-        console.log(hsize);
-        console.log(navheight);
-        console.log(main_height);
-        $("#sidebar").css("height", hsize-navheight + "px");
-        // $("#main_height").css("height", hsize-navheight + "px");
-
-      });
-
-      $(window).resize(function () {
-
-        hsize = $(window).height();
-
-        $("#sidebar").css("height", hsize + "px");
-
-      });
-      // 画面高さ取得終了
-
-    </script>
   </head>
   <body class="">
  
@@ -124,78 +67,8 @@
 
 
         <!-- メイン画面row -->
-        <div class="row m-0" id="main_height">
           <!-- メイン画面col2分割 -->
-            <div class="col-2 d-md-block d-none" id="sidebar">
-            <!-- tab -->
-              <ul class="nav nav-tabs">
-                <!-- <div class="row">
-                  <div class="col-6"> -->
-                    <li class="active nav-item"><a href="#matches" data-toggle="tab" class="nav-link tabname">MATCHES</a></li>
-                  <!-- </div> -->
-                  <!-- <div class="col-6"> -->
-                      <li class="nav-item"><a href="#messages" data-toggle="tab" class="nav-link tabname">MESSAGES</a></li>
-                  <!-- </div>
-                </div> -->
-              </ul>
-            <!-- tab 終了 -->
-            <!-- tab content -->
-              <div class="tab-content">
-                <!-- matches tab-pane開始 -->
-                <div class="tab-pane active" id="matches">
-                  <div class="row">
-                    <?php foreach($matchUsers as $matchUser): ?>
-                      <div class="col-md-6 col-sm-12 m-0 p-1">
-                        <a href="matchProfile.php?user_id=<?php echo $matchUser['user_id'] ?>">
-                          <img src="../upload/<?php echo $matchUser['user_image1']?>" alt="" style="height:100%; width:100%;margin:0px; padding:0px;">
-                        </a>
-                      </div>
-                    <?php endforeach; ?>
-                  </div>
-                </div>
-                <!-- matches tab-pane終 -->
-                <!-- message tab-pane -->
-                <div class="tab-pane" id="messages">
-                    
-                      <?php 
-                      krsort($messageArray);
-                      foreach ($messageArray as $key => $eachMessage):
-                      $messageUserID1 = $eachMessage['user_id1'];
-                      $messageUserID2 = $eachMessage['user_id2'];
-                      if($messageUserID1 == $userID){
-                        $messageUserID = $messageUserID2;
-                      }else{
-                        $messageUserID = $messageUserID1;
-                      }
-                      $messageUser = $user->getOneUser($messageUserID);
-                      ?>
-                        <a href="direct_message.php?user_id=<?php echo $messageUser['user_id'] ?>">
-                        <div class="row">
-                          <div class="col-3">
-                            <img src="../upload/<?php echo $messageUser['user_image1'] ?>" alt="" style="height:80px; width:60px;">
-                          </div>
-                          <div class="col-8 offset-1">
-                            <span class="message_user"><?php echo $messageUser['username']; ?></span>
-                            <br>
-                            <?php 
-                              if($eachMessage['user_id1'] == $userID):
-                            ?>
-                            <i class="fas fa-undo-alt"></i>
-                            <?php endif; ?>
-                            <?php echo $eachMessage['content']; ?>
-                          </div>
-                        </div>
-                        </a>
-                      <?php endforeach?>
-      
-                </div>
-              </div>
-              <!-- tab content 終了 -->
-            </div>
-              
-          <!-- ↑メイン画面col2分割終了 -->
           <!-- ↓メイン画面col10分割開始 -->
-          <div class="col-md-10 col-sm-12 main_bg_color p-0">
           
             
 
@@ -245,17 +118,22 @@
                     <div class="row">
                         <div class="col-12">
                           <div class="w-50 mx-auto">
-                            <a href="direct_message.php?user_id=<?php echo $userID2 ?>" class="btn btn-block btn-red mt-4 btn-lg"><i class="fas fa-heart text-light"></i> Message</a>
+                            <a href="addMoreInfo.php" class="btn btn-block btn-red mt-4 btn-lg"> Edit Profile</a>
                           </div>
                         </div>
                     </div>
                 
+                    <div class="row">
+                      <div class="col-12">
+                        <div class="w-50 mx-auto">
+                          <a href="deleteUser.php" class="btn btn-block btn-dark btn-lg mt-4">Delete Account</a>
+                        </div>
+                      </div>
+                    </div>
                       
             <!-- </div> -->
-            </div>
 
             <!-- ↑メイン画面col10分割終了 -->
-            </div>
             <!-- メイン画面row終了 -->
           </div>
     <!-- Optional JavaScript -->
@@ -265,4 +143,3 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   </body>
 </html>
-    <?php endif; ?>

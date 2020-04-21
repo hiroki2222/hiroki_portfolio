@@ -24,7 +24,19 @@
                 return $dataHolder;
                 // print_r($dataHolder);
             }else{
-                return 'error';
+                return false;
+            }
+        }
+
+        function getTheLatestMessage($userID,$matchUserID){
+            $sql = "SELECT * FROM messages WHERE (user_id = $userID AND received_user_id = $matchUserID) OR (user_id = $matchUserID AND received_user_id = $userID) ORDER BY created_at DESC LIMIT 1";
+
+            $result = $this->conn->query($sql);
+
+            if($result->num_rows>0){
+                return $result->fetch_assoc();
+            }else{
+                return '';
             }
         }
 

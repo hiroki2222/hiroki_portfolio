@@ -1,13 +1,51 @@
 <?php
     include '../action/likeAction.php';
+    include '../action/dislikeAction.php';
     include '../action/userAction.php';
-    $randUserInfo = $user->getRandomUserData();
+    include '../action/matchAction.php';
+    include '../action/messageAction.php';
     $userID = $_SESSION['user_id'];
-    $user->getLoginTimes($userID);
-    $loginTimes = $_SESSION['login_times'];
-    if($loginTimes == 1):
-    header('Location:addMoreInfo.php');
-     endif; ?>
+    $alreadyDisplayedUsers = array();
+    $alreadyLikedUsers = $like->getOnesLikes($userID);
+    $alreadyDislikedUsers = $dislike->getOnesDislikes($userID);
+    if($alreadyLikedUsers){
+      foreach($alreadyLikedUsers as $alreadyLikedUser){
+        array_push($alreadyDisplayedUsers,$alreadyLikedUser['received_user_id']);
+      }
+    }
+    if($alreadyDislikedUsers){
+      foreach($alreadyDislikedUsers as $alreadyDislikedUser){
+        array_push($alreadyDisplayedUsers,$alreadyDislikedUser['received_user_id']);
+      }
+    }
+    $randUserInfo = $user->getRandomUserData($alreadyDisplayedUsers);
+    $allMatchedID = $match->getAllMatchedID($userID);
+    if($allMatchedID){
+      foreach($allMatchedID as $eachID){
+        $matchUsers[] = $user->getOneUser($eachID);
+      }
+      $messageArray = array();
+      $textTimeArray = array();
+      $messageValueArray = array();
+      foreach($matchUsers as $matchUser){
+        $matchUserID = $matchUser['user_id'];
+        $latestMessages = $message->getTheLatestMessage($userID,$matchUserID);
+        // print_r($latestMessages);
+        if($latestMessages){
+          array_push($textTimeArray,$latestMessages['created_at']);
+          // array_push($messageTextArray,$latestMessages['m.textmessage']);
+          // array_push($messageUserArray,$latestMessages['u.username']);
+          // array_push($messageImgArray,$latestMessages['u.user_image1']);
+          $messageValueArray[] = array(
+                                      'user_id1' => $latestMessages['user_id'],
+                                      'user_id2' => $latestMessages['received_user_id'],
+                                      'content' => $latestMessages['textmessage'],
+          );
+        }
+      }
+      $messageArray = array_combine($textTimeArray,$messageValueArray);
+    }
+    ?>
 
 <!doctype html>
 <html lang="en">
@@ -17,82 +55,227 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <script src="https://kit.fontawesome.com/eb83b1af77.js" crossorigin="anonymous"></script>
-
+    <!-- <script src="https://kit.fontawesome.com/eb83b1af77.js" crossorigin="anonymous"></script> -->
+    <link href="https://use.fontawesome.com/releases/v5.13.0/css/all.css" rel="stylesheet">
 
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  </head>
-  <body>
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-8">
-            <h1 class="display-4">(site title)</h1>
-          </div>
-          <div class="col-4">
-            <div class="float-right">
-              <a href="profile.php" class="">
-                <i class="fas fa-user fa-5x" style="color: pink;"></i>
-              </a>
-              <a href="seeAllMatches.php" class="">
-                <i class="fas fa-heart fa-5x" style="color: pink;"></i>
-            </a>
-              <a href="" class="">
-                <i class="fas fa-envelope fa-5x" style="color: pink;"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="container">
-        <div class="card mt-5">
-          <div class="card-body">
-            <!-- TO DO: show a pic which is selected randomly from database -->
-            <!-- <img src="../img/ninja.png" alt="" class="d-block mx-auto"> -->
-            <div >
-              <img src="../upload/<?php echo $randUserInfo['user_image1']?>" alt="" class="d-block mx-auto" style="height:400px; width:400px;">
-              <br>
-                <div class="col-12" style="">
-                  name:<?php echo $randUserInfo['username']?>
-                </div>
-                <div class="col-12">
-                  age:<?php echo $randUserInfo['age']?>
-              </div>
-              <div class="col-12">
-                address:<?php echo $randUserInfo['address']?>
-            </div>
-            
-                <div class="col-12">
-                  job:<?php echo $randUserInfo['job']?>
-                </div>
-                <div class="col-12">
-                  school:<?php echo $randUserInfo['school']?>
-                </div>
-                <div class="col-12">
-                  hobby:<?php echo $randUserInfo['hobby']?>
-                </div>
-            </div>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+      // 画面高さ取得jquery
+      $(document).ready(function () {
 
-            
-          </div>
-            <div class="card-footer bg-white">
-                <div class="row">
-                  <div class="col-6">
-                    <a href="dislike.php"><i class="fas fa-heart-broken fa-8x"></i></a>
-                  </div>
-                    <div class="col-6">
-                      <div class="float-right">
-                        <a href="likeclick.php"><i class="fas fa-heart fa-8x" style="color: pink;"></i></a>
+        hsize = $(window).outerHeight(true);
+        navheight = $("#navheight").outerHeight(true);
+        main_height = $("#main_height").outerHeight(true);
+        console.log(hsize);
+        console.log(navheight);
+        console.log(main_height);
+        $("#sidebar").css("height", hsize-navheight + "px");
+        // $("#main_height").css("height", hsize-navheight + "px");
+
+      });
+
+      $(window).resize(function () {
+
+        hsize = $(window).height();
+
+        $("#sidebar").css("height", hsize + "px");
+
+      });
+      // 画面高さ取得終了
+
+    </script>
+  </head>
+  <body class="">
+ 
+    <!-- メイン画面 container-fluid開始-->
+    <nav class="navbar navbar-expand-lg navbar-dark static-top nav_design p-0" id="navheight">
+          <a class="nav_letters mt-3 ml-2" href="index.php" id="logo">
+            theRightOne
+          </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto mt-4 text-center" style="font-size: 18px;">
+        <li class="nav-item mr-5">
+          <a class="nav_letters nav_page_letter" href="dashboard.php"><i class="fas fa-home"></i>Home
+                <span class="sr-only">(current)</span>
+              </a>
+        </li>
+        <li class="nav-item mr-5">
+          <a class="nav_letters nav_page_letter" href="profile.php"><i class="fas fa-user"></i>Profile</a>
+        </li>
+        <!-- <li class="nav-item mr-5">
+          <a class="nav_letters nav_page_letter" href="seeAllMatches.php"><i class="fas fa-heart"></i>Matches</a>
+        </li> -->
+        <li class="nav-item mr-5">
+          <a class="nav_letters nav_page_letter" href="contact.php"><i class="fas fa-envelope"></i>Contact</a>
+        </li>
+      </ul>
+    </div>
+</nav>
+      <div class="container-fluid p-0 overflow-hidden">
+      
+
+
+
+        <!-- メイン画面row -->
+        <div class="row m-0" id="main_height">
+          <!-- メイン画面col2分割 -->
+            <div class="col-2 d-md-block d-none" id="sidebar">
+            <!-- tab -->
+              <ul class="nav nav-tabs">
+                <!-- <div class="row">
+                  <div class="col-6"> -->
+                    <li class="active nav-item"><a href="#matches" data-toggle="tab" class="nav-link tabname">MATCHES</a></li>
+                  <!-- </div> -->
+                  <!-- <div class="col-6"> -->
+                      <li class="nav-item"><a href="#messages" data-toggle="tab" class="nav-link tabname">MESSAGES</a></li>
+                  <!-- </div>
+                </div> -->
+              </ul>
+            <!-- tab 終了 -->
+            <!-- tab content -->
+              <div class="tab-content">
+                <!-- matches tab-pane開始 -->
+                <div class="tab-pane active" id="matches">
+                  <div class="row">
+                    <?php foreach($matchUsers as $matchUser): ?>
+                      <div class="col-md-6 col-sm-12 m-0 p-1">
+                        <a href="matchProfile.php?user_id=<?php echo $matchUser['user_id'] ?>">
+                          <img src="../upload/<?php echo $matchUser['user_image1']?>" alt="" style="height:100%; width:100%;margin:0px; padding:0px;">
+                        </a>
                       </div>
+                    <?php endforeach; ?>
                   </div>
                 </div>
-                    <div class="mx-auto text-center border-top">
-                        <a href="" class="" style="font-size: 36px;">Report <?php echo $randUserInfo['username'] ?></a> 
-                    </div>
+                <!-- matches tab-pane終 -->
+                <!-- message tab-pane -->
+                <div class="tab-pane" id="messages">
+                    
+                      <?php 
+                      krsort($messageArray);
+                      foreach ($messageArray as $key => $eachMessage):
+                      $messageUserID1 = $eachMessage['user_id1'];
+                      $messageUserID2 = $eachMessage['user_id2'];
+                      if($messageUserID1 == $userID){
+                        $messageUserID = $messageUserID2;
+                      }else{
+                        $messageUserID = $messageUserID1;
+                      }
+                      $messageUser = $user->getOneUser($messageUserID);
+                      ?>
+                        <a href="direct_message.php?user_id=<?php echo $messageUser['user_id'] ?>">
+                        <div class="row">
+                          <div class="col-3">
+                            <img src="../upload/<?php echo $messageUser['user_image1'] ?>" alt="" style="height:80px; width:60px;">
+                          </div>
+                          <div class="col-8 offset-1">
+                            <span class="message_user"><?php echo $messageUser['username']; ?></span>
+                            <br>
+                            <?php 
+                              if($eachMessage['user_id1'] == $userID):
+                            ?>
+                            <i class="fas fa-undo-alt"></i>
+                            <?php endif; ?>
+                            <?php echo $eachMessage['content']; ?>
+                          </div>
+                        </div>
+                        </a>
+                      <?php endforeach?>
+      
+                </div>
+              </div>
+              <!-- tab content 終了 -->
+            </div>
+              
+          <!-- ↑メイン画面col2分割終了 -->
+          <!-- ↓メイン画面col10分割開始 -->
+          <div class="col-md-10 col-sm-12 main_bg_color p-0">
+          
+          <?php
+            if($_SESSION['no_user'] == 'no_user'):
+          ?>
+          <div class="display-4 mx-auto text-center">You already swiped all users</div>
+            <?php else:?>
+<!-- profile -->
+    <div class="mx-auto mt-5 bg-white border w-50">
+        <div class="row">
+            <div class="col-md-6 col-sm-12" style="width:300px;">
+              <div class="img_box">
+                <img src="../upload/<?php echo $randUserInfo['user_image1'] ?>" alt="" class="profile_pic img-fluid">
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+            <div class="row mt-2">
+                  <div class="col-md-6 col-sm-12">
+                    <p class="info text-center font-weight-bold"><?php echo $randUserInfo['username']?></p>
+                  </div>
+                  <div class="col-md-6 col-sm-12">
+                    <p class="info text-center font-weight-bold">age:<?php echo $randUserInfo['age'] ?></p>
+                </div>
+              </div>
+              <div class="row profile_sec">
+                  <div class="col-md-6 col-sm-12">
+                    <p class="info text-center"><i class="fas fa-map-marker-alt"></i> <?php echo $randUserInfo['address'] ?></p>
+                  </div>
+                  <div class="col-md-6 col-sm-12">
+                    <p class="info text-center"><i class="fas fa-briefcase"></i> <?php echo $randUserInfo['job'] ?></p>
+                  </div>
+              </div>
+              <div class="row profile_sec">
+                  <div class="col-md-6 col-sm-12">
+                      <p class="info text-center"><i class="fas fa-school"></i> <?php echo $randUserInfo['school'] ?></p>
+                  </div>
+                  <div class="col-md-6 col-sm-12">
+                    <p class="info text-center"><i class="fas fa-heart"></i> <?php echo $randUserInfo['hobby'] ?></p>
+                  </div>
+              </div>
+              <div class="row profile_sec">
+                  <div class="col-12">
+                    <p class="mt-3 info text-break mx-3"><?php echo $randUserInfo['profile_comment']?></p>
+                  </div>
+              </div>
             </div>
         </div>
-      </div>
+    </div>
+          
+           
+                    <div class="row">
+                        <div class="col-12">
+                          <div class="w-50 mx-auto">
+                            <a href="likeclick.php" class="btn btn-block btn-red mt-4 btn-lg"><i class="fas fa-heart text-light"></i> Interested</a>
+                          </div>
+                        </div>
+                    </div>
+                
+                    <div class="row">
+                      <div class="col-12">
+                        <div class="w-50 mx-auto">
+                          
+                          <a href="dislikeclick.php" class="btn btn-grey btn-block btn-lg mt-4"><i class="far fa-times-circle"></i>Not Interested</a>
+                        </div>
+                      </div>
+                      </div>
+                      
+                    <div class="text-center mt-4">
+                      <a href="report.php?user_id=<?php echo $randUserInfo['user_id'] ?>" class="text-dark"><i class="fas fa-flag"></i> Report <?php echo $randUserInfo['username'] ?></a>
+                    </div>
+            <!-- </div> -->
+            </div>
+            <?php endif;?>
+            <!-- ↑メイン画面col10分割終了 -->
+            </div>
+            <!-- メイン画面row終了 -->
+          </div>
+
+
+      <!-- メイン画面container-fluid終わり -->
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
