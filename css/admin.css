@@ -18,13 +18,4 @@ body{
     font-size: 20px;
     border-bottom:1px dotted black;
 }
-a{
-    color:black;
-}
-a:hover{
-    text-decoration: none;
-}
-th,td{
-    line-height: 2em;
-    font-size: 20px;
-}
+

@@ -4,10 +4,11 @@
     session_start();
 
     if(isset($_POST['register'])){
-        $username = $_POST['username'];
+        $username = htmlspecialchars($_POST['username'],ENT_QUOTES);
         $gender = $_POST['gender'];
-        $email = $_POST['email'];
-        $password = md5($_POST['password']);
+        $likeGender = $_POST['like_gender'];
+        $email = htmlspecialchars($_POST['email'],ENT_QUOTES);
+        $password = htmlspecialchars(md5($_POST['password']),ENT_QUOTES);
         $check = $user->checkExistedAccount($email);
         if($check == TRUE){
             // echo $check;
@@ -15,21 +16,21 @@
             return $_SESSION['duplicate_error'] = TRUE;
         }elseif($check == FALSE){
             // echo "ACCOUNT CREATED";
-            $user->createAccount($username,$gender,$email,$password);
+            $user->createAccount($username,$gender,$likeGender,$email,$password);
             header('Location:../views/index.php');
             exit();
         }
     }
     elseif(isset($_POST['add'])){
-        $address = $_POST['address'];
-        $age = $_POST['age'];
-        $gender = $_POST['gender'];
-        $likeGender = $_POST['like'];
-        $job = $_POST['job'];
-        $school = $_POST['school'];
-        $hobby = $_POST['hobby'];
-        $userID = $_SESSION['user_id'];
-        $profileMessage = $_POST['profile_message'];
+        $address = htmlspecialchars($_POST['address'],ENT_QUOTES);
+        $age = htmlspecialchars($_POST['age'],ENT_QUOTES);
+        $gender = htmlspecialchars($_POST['gender'],ENT_QUOTES);
+        $likeGender = htmlspecialchars($_POST['like'],ENT_QUOTES);
+        $job = htmlspecialchars($_POST['job'],ENT_QUOTES);
+        $school = htmlspecialchars($_POST['school'],ENT_QUOTES);
+        $hobby = htmlspecialchars($_POST['hobby'],ENT_QUOTES);
+        $userID = htmlspecialchars($_SESSION['user_id'],ENT_QUOTES);
+        $profileMessage = htmlspecialchars($_POST['profile_message'],ENT_QUOTES);
         // $pic = $_FILES['pic']['name'];
         $result = $user->addDetails($address,$age,$likeGender,$job,$school,$hobby,$profileMessage,$userID);
 
@@ -58,8 +59,8 @@
         }
     }
     elseif(isset($_POST['login'])){
-        $email = $_POST['email'];
-        $password = md5($_POST['password']);
+        $email = htmlspecialchars($_POST['email'],ENT_QUOTES);
+        $password = htmlspecialchars(md5($_POST['password']),ENT_QUOTES);
         
         $login = $user->login($email,$password);
         if ($login) {
@@ -106,7 +107,7 @@
         // echo count($pic);
         // var_dump($_FILES);
         $userID = $_SESSION['user_id'];
-        $btnValue = $_POST['update_photo'];
+        $btnValue = htmlspecialchars($_POST['update_photo'],ENT_QUOTES);
         $target_dir = "../upload/";
         $target_file = $target_dir.basename($_FILES["pic"]["name"]);
         $result = $user->updatePhoto($pic,$userID);

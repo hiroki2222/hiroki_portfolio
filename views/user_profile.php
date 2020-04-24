@@ -3,7 +3,7 @@
     include '../action/userAction.php';
     include '../action/matchAction.php';
     include '../action/messageAction.php';  
-    $userID = $_POST['user_id'];
+    $userID = $_GET['user_id'];
     $loggedInUser = $user->getOneUser($userID);
     $username = $loggedInUser['username'];
     $age = $loggedInUser['age'];
@@ -35,32 +35,36 @@
   <body class="">
  
     <!-- メイン画面 container-fluid開始-->
-    <nav class="navbar navbar-expand-lg navbar-dark static-top nav_design p-0" id="navheight">
-          <a class="nav_letters mt-3 ml-2" href="index.php" id="logo">
-            theRightOne
-          </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-    <div class="collapse navbar-collapse" id="navbarResponsive">
-      <ul class="navbar-nav ml-auto mt-4 text-center" style="font-size: 18px;">
-        <li class="nav-item mr-5">
-          <a class="nav_letters nav_page_letter" href="dashboard.php"><i class="fas fa-home"></i>Home
-                <span class="sr-only">(current)</span>
+    <div class="row nav_row">
+      <div class="col-12">
+        <nav class="navbar navbar-expand-lg navbar-dark static-top nav_design" id="navheight">
+              <a class="nav_letters mt-3 ml-2" href="index.php" id="logo">
+                theRightOne
               </a>
-        </li>
-        <li class="nav-item mr-5">
-          <a class="nav_letters nav_page_letter" href="profile.php"><i class="fas fa-user"></i>Profile</a>
-        </li>
-        <li class="nav-item mr-5">
-          <a class="nav_letters nav_page_letter" href="seeAllMatches.php"><i class="fas fa-heart"></i>Matches</a>
-        </li>
-        <li class="nav-item mr-5">
-          <a class="nav_letters nav_page_letter" href="contact.php"><i class="fas fa-envelope"></i>Contact</a>
-        </li>
-      </ul>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto mt-4 text-center" style="font-size: 18px;">
+            <li class="nav-item mr-5">
+              <a class="nav_letters nav_page_letter" href="dashboard.php"><i class="fas fa-home"></i>Home
+                    <span class="sr-only">(current)</span>
+                  </a>
+            </li>
+            <li class="nav-item mr-5">
+              <a class="nav_letters nav_page_letter" href="profile.php"><i class="fas fa-user"></i>Profile</a>
+            </li>
+            <li class="nav-item mr-5">
+              <a class="nav_letters nav_page_letter" href="seeAllMatches.php"><i class="fas fa-heart"></i>Matches</a>
+            </li>
+            <li class="nav-item mr-5">
+              <a class="nav_letters nav_page_letter" href="contact.php"><i class="fas fa-envelope"></i>Contact</a>
+            </li>
+          </ul>
+        </div>
+    </nav>
+      </div>
     </div>
-</nav>
       <div class="container-fluid p-0 overflow-hidden">
       
 

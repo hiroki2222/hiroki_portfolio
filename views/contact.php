@@ -1,5 +1,10 @@
 <?php
   include '../action/contactAction.php';
+  include '../action/userAction.php';
+  if(!isset($_SESSION['user_id'])){
+    header('Location:index.php');
+    exit();
+  }
 ?>
 <!doctype html>
 <html lang="en">
@@ -44,7 +49,9 @@
     </script>
   </head>
   <body class="">
-  <nav class="navbar navbar-expand-lg navbar-dark fixed-top nav_design p-0" id="navheight">
+  <div class="row m-0 p-0 nav_row" id="navheight">
+      <div class="col-12">
+      <nav class="navbar navbar-expand-lg navbar-dark static-top nav_design">
           <a class="nav_letters mt-3 ml-2" href="index.php" id="logo">
             theRightOne
           </a>
@@ -67,13 +74,18 @@
         <li class="nav-item mr-5">
           <a class="nav_letters nav_page_letter" href="contact.php"><i class="fas fa-envelope"></i>Contact</a>
         </li>
+        <li class="nav-item mr-5">
+          <a class="nav_letters nav_page_letter" href="logout.php">Logout</a>
+        </li>
       </ul>
     </div>
 </nav>
+      </div>
+    </div>
 
 
     <div class="container">
-          <div class="mx-auto border border-0 w-50" style="margin-top:100px">
+          <div class="mx-auto border border-0 w-50 mt-5" style="">
               <div class="text-dark border-0  mb-3">
                   <h2 class="text-center display-4 border-bottom">Contact</h2>
               </div>

@@ -17,9 +17,9 @@
                 return FALSE;
             }
         }
-        public function createAccount($username,$gender,$email,$password){
+        public function createAccount($username,$gender,$likeGender,$email,$password){
                 $createAccount = "INSERT INTO accounts(email,password)VALUES('$email','$password')";
-                $createUser = "INSERT INTO users(username,gender)VALUES('$username','$gender')";
+                $createUser = "INSERT INTO users(username,gender,like_gender)VALUES('$username','$gender','$likeGender')";
                 $newAccount = $this->conn->query($createAccount);
                 $newUser = $this->conn->query($createUser);
                 if($newAccount == FALSE || $newUser == FALSE){
@@ -193,6 +193,26 @@
                 die("No record Found: ".$this->conn->error);
             }
         }
-
+        public function countUsers(){
+            $sql = "SELECT COUNT(*) AS cnt FROM users";
+            $result = $this->conn->query($sql);
+            if($result->num_rows>0){
+                return $result->fetch_assoc();
+            }else{
+                return FALSE;
+            }
+        }
+        public function getTenUsers($start){
+            $sql = "SELECT * FROM users LIMIT $start,10";
+            $result = $this->conn->query($sql);
+            if($result->num_rows>0){
+                while($tableData = $result->fetch_assoc()){
+                    $dataHolder[] = $tableData;
+                }
+                return $dataHolder;
+            }else{
+                return FALSE;
+            }
+        }
     }
 ?>

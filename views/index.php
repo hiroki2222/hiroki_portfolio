@@ -33,32 +33,36 @@
   </head>
   <body>
     <!-- <div id="" class="pb-2"> -->
-    <nav class="navbar navbar-expand-lg navbar-dark static-top nav_design">
-    <a class="mt-3 ml-2 nav_letters" href="#" id="logo">
-      theRightOne
-    </a>
+    <div class="row m-0 p-0 nav_row" id="navheight">
+      <div class="col-12">
+      <nav class="navbar navbar-expand-lg navbar-dark static-top nav_design">
+          <a class="nav_letters mt-3 ml-2" href="index.php" id="logo">
+            theRightOne
+          </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
-      <ul class="navbar-nav ml-auto mt-4" style="font-size: 18px;">
+      <ul class="navbar-nav ml-auto mt-4 text-center" style="font-size: 18px;">
         <li class="nav-item mr-5">
           <a class="nav_letters nav_page_letter" href="">About Us
                 <span class="sr-only">(current)</span>
               </a>
         </li>
         <li class="nav-item mr-5">
-          <a class="nav_letters nav_page_letter" href="">Contact</a>
-        </li>
-        <li class="nav-item mr-5">
-          <a class="nav_letters nav_page_letter" href="">Language</a>
-        </li>
-        <li class="nav-item">
           <a class="nav_letters nav_page_letter" href="">Jobs</a>
+        </li>
+        <!-- <li class="nav-item mr-5">
+          <a class="nav_letters nav_page_letter" href="seeAllMatches.php"><i class="fas fa-heart"></i>Matches</a>
+        </li> -->
+        <li class="nav-item mr-5">
+          <a class="nav_letters nav_page_letter" href="">Contact</a>
         </li>
       </ul>
     </div>
 </nav>
+      </div>
+    </div>
     <!-- </div> -->
       <div class="container" style="margin-top:200px;">
           <h2 class="text-center display-2 top_message" style="letter-spacing:.06em;">Find the right one.</h2>
@@ -80,12 +84,22 @@
                 <div class="modal-body">
                     <form action="" method="post">
                     <div class="row">
-                        <div class="col-8">
+                        <div class="col-12">
                             <input type="text" class="form-control" placeholder="username" name="username">
                         </div>
-                        <div class="col-4">
-                            <select name="gender" id="" class="form-control">
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-6">
+                            <select name="gender" id="" class="form-control" required>
                                 <option value="" selected disabled>gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                        </div>
+                        <div class="col-6">
+                            <select name="like_gender" id="" class="form-control" required>
+                                <option value="" selected disabled>your interest</option>
                                 <option value="Male">Male</option>
                                 <option value="Female">Female</option>
                             </select>
@@ -98,7 +112,7 @@
                         <input type="password" class="form-control" placeholder="password" name="password">
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-grey" data-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-red" name="register" data-target="#loginModal" data-toggle="modal">Register</button>
                     </div>
                     </form>
@@ -131,7 +145,7 @@
                         <input type="password" class="form-control" placeholder="password" name="password">
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-grey" data-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-red" name="login">Login</button>
                     </div>
                 </form>

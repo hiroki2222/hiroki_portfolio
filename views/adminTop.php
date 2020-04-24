@@ -12,32 +12,33 @@
     <link rel="stylesheet" href="../css/admin.css">
   </head>
   <body>
-  <nav class="navbar navbar-expand-lg navbar-dark static-top nav_design p-0" id="navheight">
-          <a class="nav_letters mt-3 ml-2" href="index.php" id="logo">
-            theRightOne
-          </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-    <div class="collapse navbar-collapse" id="navbarResponsive">
-      <ul class="navbar-nav ml-auto mt-4 text-center" style="font-size: 18px;">
-        <li class="nav-item mr-5">
-          <a class="nav_letters nav_page_letter" href="dashboard.php"><i class="fas fa-home"></i>Home
-                <span class="sr-only">(current)</span>
-              </a>
-        </li>
-        <li class="nav-item mr-5">
-          <a class="nav_letters nav_page_letter" href="profile.php"><i class="fas fa-user"></i>Profile</a>
-        </li>
-        <li class="nav-item mr-5">
-          <a class="nav_letters nav_page_letter" href="seeAllMatches.php"><i class="fas fa-heart"></i>Matches</a>
-        </li>
-        <li class="nav-item mr-5">
-          <a class="nav_letters nav_page_letter" href="contact.php"><i class="fas fa-envelope"></i>Contact</a>
-        </li>
-      </ul>
+  <div class="row nav_row">
+    <div class="col-12">
+      <nav class="navbar navbar-expand-lg navbar-dark static-top nav_design">
+        <a class="mt-3 ml-2 nav_letters" href="index.php" id="logo">
+          theRightOne
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto mt-4" style="font-size: 18px;">
+            <li class="nav-item mr-5">
+              <a class="nav_letters nav_page_letter" href="adminTop.php">Home
+                    <span class="sr-only">(current)</span>
+                  </a>
+            </li>
+            <li class="nav-item mr-5">
+              <a class="nav_letters nav_page_letter" href="user_list.php">User List</a>
+            </li>
+            <li class="nav-item mr-5">
+              <a class="nav_letters nav_page_letter" href="user_feedback.php">User Feedback</a>
+            </li>
+          </ul>
+        </div>
+    </nav>
     </div>
-</nav>
+  </div>
 
 <div class="container-fluid mt-5">
     <div class="card w-50 mx-auto">

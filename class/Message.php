@@ -6,7 +6,8 @@
 
             $result = $this->conn->query($sql);
             if($result == TRUE){
-                // header("Location: " . $_SERVER['PHP_SELF']);
+                header("Location: " . $_SERVER['SCRIPT_NAME']."?user_id=$receivedID");
+                exit();
             }else{
                 die('cannot send message '.$this->conn->error);
             }
@@ -37,6 +38,28 @@
                 return $result->fetch_assoc();
             }else{
                 return '';
+            }
+        }
+
+        public function countMessages($userID,$matchUserID){
+            $sql = "SELECT COUNT(*) AS cnt FROM messages WHERE (user_id = $userID AND received_user_id = $matchUserID) OR (user_id = $matchUserID AND received_user_id = $userID)";
+            $result = $this->conn->query($sql);
+            if($result->num_rows>0){
+                return $result->fetch_assoc();
+            }else{
+                return FALSE;
+            }
+        }
+        public function getFiveMessages($userID,$receivedID,$start){
+            $sql = "SELECT u.*,m.* FROM users u,messages m WHERE u.user_id = m.user_id AND ((m.user_id = $userID AND m.received_user_id = $receivedID) OR (m.user_id = $receivedID AND m.received_user_id = $userID)) ORDER BY created_at DESC LIMIT $start,5";
+            $result = $this->conn->query($sql);
+            if($result->num_rows>0){
+                while($tableData = $result->fetch_assoc()){
+                    $dataHolder[] = $tableData;
+                }
+                return $dataHolder;
+            }else{
+                return FALSE;
             }
         }
 

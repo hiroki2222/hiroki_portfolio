@@ -59,135 +59,129 @@
     </script>
   </head>
   <body class="">
-  <nav class="navbar navbar-expand-lg navbar-dark fixed-top nav_design p-0" id="navheight">
+  <div class="row m-0 p-0 nav_row" id="navheight">
+      <div class="col-12">
+        
+        <nav class="navbar navbar-expand-lg navbar-dark static-top nav_design">
           <a class="nav_letters mt-3 ml-2" href="index.php" id="logo">
             theRightOne
           </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-    <div class="collapse navbar-collapse" id="navbarResponsive">
-      <ul class="navbar-nav ml-auto mt-4 text-center" style="font-size: 18px;">
-        <li class="nav-item mr-5">
-          <a class="nav_letters nav_page_letter" href="dashboard.php"><i class="fas fa-home"></i>Home
-                <span class="sr-only">(current)</span>
-              </a>
-        </li>
-        <li class="nav-item mr-5">
-          <a class="nav_letters nav_page_letter" href="profile.php"><i class="fas fa-user"></i>Profile</a>
-        </li>
-        <!-- <li class="nav-item mr-5">
-          <a class="nav_letters nav_page_letter" href="seeAllMatches.php"><i class="fas fa-heart"></i>Matches</a>
-        </li> -->
-        <li class="nav-item mr-5">
-          <a class="nav_letters nav_page_letter" href="contact.php"><i class="fas fa-envelope"></i>Contact</a>
-        </li>
-      </ul>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto mt-4 text-center" style="font-size: 18px;">
+              <li class="nav-item mr-5">
+                  <a class="nav_letters nav_page_letter" href="dashboard.php"><i class="fas fa-home"></i>Home
+                  <span class="sr-only">(current)</span>
+                </a>
+              </li>
+              <li class="nav-item mr-5">
+                <a class="nav_letters nav_page_letter" href="profile.php"><i class="fas fa-user"></i>Profile</a>
+              </li>
+              <li class="nav-item mr-5">
+                <a class="nav_letters nav_page_letter" href="contact.php"><i class="fas fa-envelope"></i>Contact</a>
+              </li>
+              <li class="nav-item mr-5">
+                <a class="nav_letters nav_page_letter" href="logout.php">Logout</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
     </div>
-</nav>
 
 
     <div class="container">
-          <div class="mx-auto border border-0 w-50" style="margin-top:100px">
-              <div class="text-dark border-0  mb-3">
-                  <h2 class="text-center display-4 border-bottom">Your Profile</h2>
-              </div>
-              
-                  <form action="../action/userAction.php" method="post" enctype="multipart/form-data">
-                      <div class="form-row">
-                            <div class="form-group col-md-6 col-sm-12 col-xs-12 mb-4">
-                              <label for="address">Address:</label>
-                                <select name="address" id="address" class="w-100 form-control">
-                                  <?php
-                                    if($userAddress):
-                                  ?>
-                                    <?php 
-                                    $addresses = array_diff($addresses,array($userAddress));
-                                    $addresses = array_values($addresses);
-                                    ?>
-                                    <option value="<?php echo $userAddress ?>" selected><?php echo $userAddress ?></option>
-                                    <?php else: ?>
-                                    <option value="" selected disabled  class="form-control">Address</option>
-                                    
-                                  <?php endif; ?>
-                                  <?php
-                                    foreach($addresses AS $address):
-                                    ?>
-                                    <option value="<?php echo $address ?>"><?php echo $address ?></option>
+        <div class="mx-auto border border-0 w-50 mt-4">
+            <div class="text-dark border-0  mb-3">
+                <h2 class="text-center display-4 border-bottom">Your Profile</h2>
+            </div>
+            
+            <form action="../action/userAction.php" method="post" enctype="multipart/form-data">
+                <div class="form-row">
+                      <div class="form-group col-md-6 col-sm-12 col-xs-12 mb-4">
+                        <label for="address">Address:</label>
+                          <select name="address" id="address" class="w-100 form-control">
+                            <?php
+                              if($userAddress):
+                            ?>
+                              <?php 
+                              $addresses = array_diff($addresses,array($userAddress));
+                              $addresses = array_values($addresses);
+                              ?>
+                              <option value="<?php echo $userAddress ?>" selected><?php echo $userAddress ?></option>
+                              <?php else: ?>
+                              <option value="" selected disabled  class="form-control">Address</option>
+                              
+                            <?php endif; ?>
+                            <?php
+                              foreach($addresses AS $address):
+                              ?>
+                              <option value="<?php echo $address ?>"><?php echo $address ?></option>
 
-                                    <?php endforeach; ?>
-                                    
-                                    
-                                </select>
-                            </div>
-                            <div class="form-group col-md-6 col-sm-12 col-xs-12 mb-4">
-                              <label for="age">Age:</label>
-                              <input type="number" name="age" id="age" class="p-4 form-control" placeholder="age" value="<?php echo $age ?>">
-                            </div>
-                            <!-- <div class="form-group col-md-6 col-sm-12 col-xs-12 mb-4">
-                                <select name="gender" id="" class="w-100 form-control">
-                                    <option value="" selected disabled  class="form-control">Gender</option>
-                                    <option value="m">Male</option>
-                                    <option value="f">Female</option>
-                                </select>
-                            </div> -->
-                            <div class="form-group col-md-6 col-sm-12 col-xs-12 mb-4">
-                                <select name="like" id="" class="w-100 form-control">
-                                  <?php
-                                    if($likeGender):
-                                    $genders = array_diff($genders,array($likeGender));
-                                    $genders = array_values($genders);
-                                  ?>
-                                    <option value="<?php echo $likeGender?>" selected disabled  class="form-control"><?php echo $likeGender?></option>
-                                    
-                                  <?php
-                                    else:
-                                  ?>
-                                    <option value="" selected disabled  class="form-control">Looking for</option>
-                                  <?php
-                                    endif;
-                                  ?>
-                                  <?php
-                                    foreach($genders AS $gender):
-                                    ?>
-                                    <option value="<?php echo $gender ?>"><?php echo $gender ?></option>
-
-                                    <?php endforeach; ?>
-                                </select>
-                            </div>
-                            <div class="form-group col-md-6 col-sm-12 col-xs-12 mb-4">
-                              <input type="text" name="job" id="job" class="p-4 form-control" placeholder="job" value="<?php echo $job?>">
-                            </div>
-                            <div class="form-group col-md-6 col-sm-12 col-xs-12 mb-4">
-                              <input type="text" name="school" id="school" class="p-4 form-control" placeholder="school" value="<?php echo $school ?>">
-                            </div>
-                            <div class="form-group col-md-6 col-sm-12 col-xs-12 mb-4">
-                              <input type="text" name="hobby" id="" class="p-4 form-control" placeholder="Your Hobby" value="<?php echo $hobby ?>">
-                              <!-- <a data-toggle="collapse" href="#oneMoreHobby" aria-expanded="false" aria-controls="oneMoreHobby">
-                              <i class="fas fa-plus-circle"></i>
-                            </a>Add More Hobbies
-                            </div> -->
-                            </div>
-                        <br>
-                        <div class="form-group col-12 mb-4">
-                          <textarea name="profile_message" id="" cols="40" rows="5" class="form-control" placeholder="Your Message (the maximum amount of characters is 200)"  maxlength="200" onKeyUp="countLength(value, 'textlength');"><?php echo $profileComment?></textarea>
-                          <span id="textlength">0</span><span>/200</span>
-                        </div>
-                        <br>
-                        <!-- <div class="form-group col-md-12   mb-4">
-                          <input type="file" name="pic" id="myfile" class="form-control">
-                          <img src="" alt="" id="img1" style="width:400px;height:400px;">
-                        </div> -->
-                        <br>
-                        <div class="form-group col-md-12">
-                              <button type="submit" class="btn-red form-control text-uppercase btn-lg" name="add">Edit</button>
-                        </div>
-                        <div class="form-group col-md-12">
-                              <button type="submit" class="btn-grey form-control text-uppercase btn-lg" name="skip">Cancel</button>
-                        </div>
+                              <?php endforeach; ?>
+                              
+                              
+                          </select>
                       </div>
-                  </form>
-              </div>
+                      <div class="form-group col-md-6 col-sm-12 col-xs-12 mb-4">
+                        <label for="age">Age:</label>
+                        <input type="number" name="age" id="age" class="p-4 form-control" placeholder="age" value="<?php echo $age ?>">
+                      </div>
+                      <div class="form-group col-md-6 col-sm-12 col-xs-12 mb-4">
+                        <label for="like">Your Interest:</label>
+                          <select name="like" id="like" class="w-100 form-control">
+                            <?php
+                              if($likeGender):
+                              $genders = array_diff($genders,array($likeGender));
+                              $genders = array_values($genders);
+                            ?>
+                              <option value="<?php echo $likeGender?>" selected class="form-control"><?php echo $likeGender?></option>
+                              
+                            <?php
+                              else:
+                            ?>
+                              <option value="" selected disabled  class="form-control">Looking for</option>
+                            <?php
+                              endif;
+                            ?>
+                            <?php
+                              foreach($genders AS $gender):
+                              ?>
+                              <option value="<?php echo $gender ?>"><?php echo $gender ?></option>
+
+                              <?php endforeach; ?>
+                          </select>
+                      </div>
+                      <div class="form-group col-md-6 col-sm-12 col-xs-12 mb-4">
+                        <label for="job">Job:</label>
+                        <input type="text" name="job" id="job" class="p-4 form-control" placeholder="job" value="<?php echo $job?>">
+                      </div>
+                      <div class="form-group col-md-6 col-sm-12 col-xs-12 mb-4">
+                        <label for="school">School</label>
+                        <input type="text" name="school" id="school" class="p-4 form-control" placeholder="school" value="<?php echo $school ?>">
+                      </div>
+                      <div class="form-group col-md-6 col-sm-12 col-xs-12 mb-4">
+                        <label for="hobby">Hobby:</label>
+                        <input type="text" name="hobby" id="hobby" class="p-4 form-control" placeholder="Your Hobby" value="<?php echo $hobby ?>">
+                      </div>
+                  <br>
+                  <div class="form-group col-12 mb-4">
+                    <textarea name="profile_message" id="" cols="40" rows="5" class="form-control" placeholder="Your Message (the maximum amount of characters is 200)"  maxlength="200" onKeyUp="countLength(value, 'textlength');"><?php echo $profileComment?></textarea>
+                    <span id="textlength">0</span><span>/200</span>
+                  </div>
+                  <br>
+                  <br>
+                  <div class="form-group col-md-12">
+                        <button type="submit" class="btn-red form-control text-uppercase btn-lg" name="add">Edit</button>
+                  </div>
+                  <div class="form-group col-md-12">
+                        <button type="submit" class="btn-grey form-control text-uppercase btn-lg" name="skip">Cancel</button>
+                  </div>
+                </div>
+            </form>
+        </div>
       </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

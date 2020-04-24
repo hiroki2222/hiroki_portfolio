@@ -16,36 +16,14 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="../css/style.css">
-    <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script>
-    $(function(){
-      $('#inputFile').change(function(e){
-        //ファイルオブジェクトを取得する
-        var file = e.target.files[0];
-        var reader = new FileReader();
     
-        //画像でない場合は処理終了
-        if(file.type.indexOf("image") < 0){
-          alert("画像ファイルを指定してください。");
-          return false;
-        }
-    
-        //アップロードした画像を設定する
-        reader.onload = (function(file){
-          return function(e){
-            $("#img1").attr("src", e.target.result);
-            $("#img1").attr("title", file.name);
-          };
-        })(file);
-        reader.readAsDataURL(file);
-    
-          });
-        });
-    </script>
   </head>
   
   <body class="">
-  <nav class="navbar navbar-expand-lg navbar-dark static-top nav_design p-0" id="navheight">
+  <div class="row m-0 p-0 nav_row" id="navheight">
+      <div class="col-12">
+        
+      <nav class="navbar navbar-expand-lg navbar-dark static-top nav_design">
           <a class="nav_letters mt-3 ml-2" href="index.php" id="logo">
             theRightOne
           </a>
@@ -68,9 +46,14 @@
         <li class="nav-item mr-5">
           <a class="nav_letters nav_page_letter" href="contact.php"><i class="fas fa-envelope"></i>Contact</a>
         </li>
+        <li class="nav-item mr-5">
+          <a class="nav_letters nav_page_letter" href="logout.php">Logout</a>
+        </li>
       </ul>
     </div>
 </nav>
+      </div>
+    </div>
 
   <div class="modal fade" id="welcomeModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -96,8 +79,10 @@
               <label class="custom-file-label" for="inputFile">Choose a file or drag and drop a file here</label>
             </div>
           </div>
-          <div class="text-center">
-            <img src="" alt="" id="img1" class="" style="width:300px;height:400px;">
+          <div class="mx-auto img_area" style="width:20%;">
+            <div class="img_box">
+              <img src="" alt="" id="img1" class="profile_pic img-fluid">
+            </div>
           </div>
             <button type="submit" name="update_photo" class="btn btn-red btn-block mt-5 btn-lg w-50 mx-auto" value="info">Submit</button>
             <a href="addMoreInfo.php" class="btn btn-block btn-grey mt-5 btn-lg w-50 mx-auto">Skip</a>
@@ -109,6 +94,31 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.js"></script>
+    <script>
+    $(function(){
+      $('#inputFile').change(function(e){
+        //ファイルオブジェクトを取得する
+        var file = e.target.files[0];
+        var reader = new FileReader();
+    
+        //画像でない場合は処理終了
+        if(file.type.indexOf("image") < 0){
+          alert("画像ファイルを指定してください。");
+          return false;
+        }
+    
+        //アップロードした画像を設定する
+        reader.onload = (function(file){
+          return function(e){
+            $("#img1").attr("src", e.target.result);
+            $("#img1").attr("title", file.name);
+          };
+        })(file);
+        reader.readAsDataURL(file);
+    
+          });
+        });
+    </script>
     <script>
       bsCustomFileInput.init();
     </script>

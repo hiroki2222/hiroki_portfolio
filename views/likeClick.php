@@ -12,14 +12,11 @@
         if($sendLike){
             $checkLike = $like->checkLike($receivedUserID,$userID);
             if($checkLike){
-                // if($likesADay == 4){
-                //     $_SESSION['wait'] == 'wait';
-                //     header('Location:dashboard.php');
-                // }
                 header('Location:dashboard.php');
             }
         }
     }else{
-        echo 'You already used all likes today';
+        $_SESSION['error'] = 'used_all_likes';
+        header('Location:dashboard.php');
     }
 ?>
