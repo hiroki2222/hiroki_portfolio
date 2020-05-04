@@ -59,37 +59,6 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="../css/style.css">
-    <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script>
-      // 画面高さ取得jquery
-      $(document).ready(function () {
-
-        hsize = $(window).outerHeight(true);
-        navheight = $("#navheight").outerHeight(true);
-        main_height = $("#main_height").outerHeight(true);
-        if(main_height<hsize-navheight){
-          $("#main_height").css("height", hsize-navheight + "px");
-        }
-        // $("#main_height").css("height", hsize-navheight + "px");
-
-      });
-
-      $(window).resize(function () {
-
-        hsize = $(window).outerHeight(true);
-        navheight = $("#navheight").outerHeight(true);
-        main_height = $("#main_height").outerHeight(true);
-        console.log(hsize);
-        console.log(navheight);
-        console.log(hsize-navheight);
-        console.log(main_height);
-        if(main_height<hsize-navheight){
-          $("#main_height").css("height", hsize-navheight + "px");
-        }
-
-      });
-      // 画面高さ取得終了
-    </script>
     
   </head>
   <body class="">
@@ -97,35 +66,33 @@
     <!-- メイン画面 container-fluid開始-->
     <div class="row m-0 p-0 nav_row" id="navheight">
       <div class="col-12">
-      <nav class="navbar navbar-expand-lg navbar-dark static-top nav_design">
+        
+        <nav class="navbar navbar-expand-lg navbar-dark static-top nav_design">
           <a class="nav_letters mt-3 ml-2" href="index.php" id="logo">
             theRightOne
           </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-    <div class="collapse navbar-collapse" id="navbarResponsive">
-      <ul class="navbar-nav ml-auto mt-4 text-center" style="font-size: 18px;">
-        <li class="nav-item mr-5">
-          <a class="nav_letters nav_page_letter" href="dashboard.php"><i class="fas fa-home"></i>Home
-                <span class="sr-only">(current)</span>
-              </a>
-        </li>
-        <li class="nav-item mr-5">
-          <a class="nav_letters nav_page_letter" href="profile.php"><i class="fas fa-user"></i>Profile</a>
-        </li>
-        <!-- <li class="nav-item mr-5">
-          <a class="nav_letters nav_page_letter" href="seeAllMatches.php"><i class="fas fa-heart"></i>Matches</a>
-        </li> -->
-        <li class="nav-item mr-5">
-          <a class="nav_letters nav_page_letter" href="contact.php"><i class="fas fa-envelope"></i>Contact</a>
-        </li>
-        <li class="nav-item mr-5">
-          <a class="nav_letters nav_page_letter" href="logout.php">Logout</a>
-        </li>
-      </ul>
-    </div>
-</nav>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto mt-4 text-center" style="font-size: 18px;">
+              <li class="nav-item mr-5">
+                  <a class="nav_letters nav_page_letter" href="user_top.php"><i class="fas fa-home"></i>Home
+                  <span class="sr-only">(current)</span>
+                </a>
+              </li>
+              <li class="nav-item mr-5">
+                <a class="nav_letters nav_page_letter" href="profile.php"><i class="fas fa-user"></i>Profile</a>
+              </li>
+              <li class="nav-item mr-5">
+                <a class="nav_letters nav_page_letter" href="contact.php"><i class="fas fa-envelope"></i>Contact</a>
+              </li>
+              <li class="nav-item mr-5">
+                <a class="nav_letters nav_page_letter" href="logout.php">Logout</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
       </div>
     </div>
       
@@ -133,183 +100,164 @@
 
 
         <!-- メイン画面row -->
-        <div class="row m-0">
+    <div class="row m-0">
           <!-- メイン画面col2分割 -->
-            <div class="col-2 d-md-block d-none bg-white" id="sidebar">
+      <div class="col-2 d-md-block d-none bg-white" id="sidebar">
             <!-- tab -->
-            <div style="height:0">
-              <ul class="nav nav-tabs">
-                <!-- <div class="row">
-                  <div class="col-6"> -->
-                    <li class="active nav-item"><a href="#matches" data-toggle="tab" class="nav-link tabname">MATCHES</a></li>
-                  <!-- </div> -->
-                  <!-- <div class="col-6"> -->
-                      <li class="nav-item"><a href="#messages" data-toggle="tab" class="nav-link tabname">MESSAGES</a></li>
-                  <!-- </div>
-                </div> -->
-              </ul>
+        <div style="height:0">
+          <ul class="nav nav-tabs">
+            <li class="active nav-item"><a href="#matches" data-toggle="tab" class="nav-link tabname">MATCHES</a></li>
+              <li class="nav-item"><a href="#messages" data-toggle="tab" class="nav-link tabname">MESSAGES</a></li>
+          </ul>
             <!-- tab 終了 -->
             <!-- tab content -->
-            <div class="tab-content">
+          <div class="tab-content">
                 <!-- matches tab-pane開始 -->
-                <div class="tab-pane active" id="matches">
-                  <div class="row">
-                  <?php if($matchUsers): ?>
-                    <?php foreach($matchUsers as $matchUser): ?>
-                      <div class="col-md-6 col-sm-12 m-0 p-1">
-                        <a href="matchProfile.php?user_id=<?php echo $matchUser['user_id'] ?>">
-                        <div class="img_box">
-                          <div class="w-100">
-                            <img src="../upload/<?php echo $matchUser['user_image1']?>" alt="" class="profile_pic img-fluid rounded match_pic">
-                          </div>
+            <div class="tab-pane active" id="matches">
+              <div class="row">
+                <?php if($matchUsers): ?>
+                  <?php foreach($matchUsers as $matchUser): ?>
+                    <div class="col-md-6 col-sm-12 m-0 p-1">
+                      <a href="matchProfile.php?user_id=<?php echo $matchUser['user_id'] ?>">
+                      <div class="img_box">
+                        <div class="w-100">
+                          <img src="../upload/<?php echo $matchUser['user_image1']?>" alt="" class="profile_pic img-fluid rounded match_pic">
                         </div>
-                        </a>
                       </div>
-                    <?php endforeach; ?>
-                    <?php endif; ?>
-                  </div>
-                </div>
-                <!-- matches tab-pane終 -->
-                <!-- message tab-pane -->
-                <div class="tab-pane" id="messages">
-                    
-                      <?php
-                      if($messageArray):
-                      krsort($messageArray);
-                      foreach ($messageArray as $key => $eachMessage):
-                      $messageUserID1 = $eachMessage['user_id1'];
-                      $messageUserID2 = $eachMessage['user_id2'];
-                      if($messageUserID1 == $userID){
-                        $messageUserID = $messageUserID2;
-                      }else{
-                        $messageUserID = $messageUserID1;
-                      }
-                      $messageUser = $user->getOneUser($messageUserID);
-                      ?>
-                        <a href="direct_message.php?user_id=<?php echo $messageUser['user_id'] ?>">
-                        <div class="row">
-                          <div class="col-6">
-                            <div class="w-100">
-                              <div class="img_box">
-                                <img src="../upload/<?php echo $messageUser['user_image1'] ?>" alt="" class="profile_pic img-fluid">
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col-6">
-                            <span class="message_user"><?php echo $messageUser['username']; ?></span>
-                            <br>
-                            <?php 
-                              if($messageUserID == $userID):
-                            ?>
-                            <i class="fas fa-undo-alt"></i>
-                            <?php endif; ?>
-                            <span class="text-break">
-                              <?php echo substr($eachMessage['content'],0,39); ?>
-                              <?php if(strlen($eachMessage['content'])>=40):?>
-                                ...
-                              <?php endif; ?>
-                            </span>
-                          </div>
-                        </div>
                       </a>
-                      <?php endforeach; ?>
-                      <?php endif;?>
                     </div>
+                  <?php endforeach; ?>
+                  <?php endif; ?>
               </div>
             </div>
-              <!-- tab content 終了 -->
+                <!-- matches tab-pane終 -->
+                <!-- message tab-pane -->
+            <div class="tab-pane" id="messages">
+                    
+              <?php
+              if($messageArray):
+              krsort($messageArray);
+              foreach ($messageArray as $key => $eachMessage):
+              $messageUserID1 = $eachMessage['user_id1'];
+              $messageUserID2 = $eachMessage['user_id2'];
+              if($messageUserID1 == $userID){
+                $messageUserID = $messageUserID2;
+              }else{
+                $messageUserID = $messageUserID1;
+              }
+              $messageUser = $user->getOneUser($messageUserID);
+              ?>
+              <a href="direct_message.php?user_id=<?php echo $messageUser['user_id'] ?>">
+                <div class="row">
+                  <div class="col-6">
+                    <div class="w-100">
+                      <div class="img_box">
+                        <img src="../upload/<?php echo $messageUser['user_image1'] ?>" alt="" class="profile_pic img-fluid">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <span class="message_user"><?php echo $messageUser['username']; ?></span>
+                    <br>
+                    <?php 
+                      if($messageUserID == $userID):
+                    ?>
+                    <i class="fas fa-undo-alt"></i>
+                    <?php endif; ?>
+                    <span class="text-break">
+                      <?php echo substr($eachMessage['content'],0,39); ?>
+                      <?php if(strlen($eachMessage['content'])>=40):?>
+                        ...
+                      <?php endif; ?>
+                    </span>
+                  </div>
+                </div>
+              </a>
+              <?php endforeach; ?>
+              <?php endif;?>
             </div>
+          </div>
+        </div>
+              <!-- tab content 終了 -->
+      </div>
               
           <!-- ↑メイン画面col2分割終了 -->
           <!-- ↓メイン画面col10分割開始 -->
-          <div class="col-md-10 col-sm-12 main_bg_color p-0" id="main_height">
-
-
-
-          
-            
-
-  <div class="mx-auto mt-5 bg-white border w-50">
-      <div class="row mb-2">
-          <div class="col-md-6 col-sm-12" style="width:100%;">
-            <div class="img_box">
-              <img src="../upload/<?php echo $pic ?>" alt="" class="profile_pic img-fluid">
+      <div class="col-md-10 col-sm-12 main_bg_color p-0" id="main_height">
+        <div class="mx-auto mt-5 bg-white border w-50">
+          <div class="row mb-2">
+            <div class="col-md-6 col-sm-12" style="width:100%;">
+              <div class="img_box">
+                <img src="../upload/<?php echo $pic ?>" alt="" class="profile_pic img-fluid">
+              </div>
             </div>
-          </div>
-          <div class="col-md-6 col-sm-12">
-          <div class="row mt-2">
+            <div class="col-md-6 col-sm-12">
+              <div class="row mt-2">
                 <div class="col-md-6 col-sm-12">
                   <p class="info text-center font-weight-bold"><?php echo $username ?></p>
                 </div>
                 <div class="col-md-6 col-sm-12">
                   <p class="info text-center font-weight-bold">age:<?php echo $age ?></p>
+                </div>
               </div>
-            </div>
-            <div class="row profile_sec">
+              <div class="row profile_sec">
                 <div class="col-md-6 col-sm-12">
                   <p class="info text-center"><i class="fas fa-map-marker-alt"></i> <?php echo $address ?></p>
                 </div>
                 <div class="col-md-6 col-sm-12">
                   <p class="info text-center"><i class="fas fa-briefcase"></i> <?php echo $job ?></p>
                 </div>
-            </div>
-            <div class="row profile_sec">
+              </div>
+              <div class="row profile_sec">
                 <div class="col-md-6 col-sm-12">
-                    <p class="info text-center"><i class="fas fa-school"></i> <?php echo $school ?></p>
+                  <p class="info text-center"><i class="fas fa-school"></i> <?php echo $school ?></p>
                 </div>
                 <div class="col-md-6 col-sm-12">
                   <p class="info text-center"><i class="fas fa-heart"></i> <?php echo $hobby ?></p>
                 </div>
-            </div>
-            <div class="row profile_sec">
+              </div>
+              <div class="row profile_sec">
                 <div class="col-12">
                   <p class="mt-3 info text-break mx-3"><?php echo $userMessage?></p>
                 </div>
+              </div>
             </div>
           </div>
-      </div>
-      <form action="" method="post" enctype="multipart/form-data">
-      <div class="form-group form-control-lg w-50">
-        <div class="custom-file form-group">
-          <input type="file" name="pic" id="" class="custom-file-input" id="inputFile">
-          <label class="custom-file-label" for="inputFile">Choose a file</label>
+          <form action="" method="post" enctype="multipart/form-data">
+            <div class="form-group form-control-lg w-50">
+              <div class="custom-file form-group">
+                <input type="file" name="pic" id="" class="custom-file-input" id="inputFile">
+                <label class="custom-file-label" for="inputFile">Choose a file</label>
+              </div>
+            </div>
+            <button type="submit" name="update_photo" value="profile" class="btn btn-blue btn-block w-50 mb-2">Change Photo</button>
+          </form>
+        </div>
+         
+        <div class="row">
+          <div class="col-12">
+            <div class="w-50 mx-auto">
+              <a href="addMoreInfo.php" class="btn btn-block btn-red mt-4 btn-lg">Edit Profile</a>
+            </div>
+          </div>
+        </div>
+              
+        <div class="row">
+          <div class="col-12">
+            <div class="w-50 mx-auto">
+              <a href="logout.php" class="btn btn-grey btn-block btn-dark btn-lg mt-4">Logout</a>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="w-50 mx-auto">
+              <a href="deleteUser.php" class="btn btn-block btn-dark btn-lg mt-4">Delete Account</a>
+            </div>
+          </div>
         </div>
       </div>
-      <button type="submit" name="update_photo" value="profile" class="btn btn-blue btn-block w-50 mb-2">Change Photo</button>
-    </form>
-  </div>
-         
-                  <div class="row">
-                      <div class="col-12">
-                        <div class="w-50 mx-auto">
-                          <a href="addMoreInfo.php" class="btn btn-block btn-red mt-4 btn-lg">Edit Profile</a>
-                        </div>
-                      </div>
-                  </div>
-              
-                  <div class="row">
-                    <div class="col-12">
-                      <div class="w-50 mx-auto">
-                        
-                        <a href="logout.php" class="btn btn-grey btn-block btn-dark btn-lg mt-4">Logout</a>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-12">
-                      <div class="w-50 mx-auto">
-                        <a href="deleteUser.php" class="btn btn-block btn-dark btn-lg mt-4">Delete Account</a>
-                      </div>
-                    </div>
-                  </div>
-<!-- profile -->
-                      
-            <!-- </div> -->
-            </div>
-
-            <!-- ↑メイン画面col10分割終了 -->
-            <!-- メイン画面row終了 -->
-          </div>
+    </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -319,17 +267,14 @@
     <script>
     $(function(){
       $('#inputFile').change(function(e){
-        //ファイルオブジェクトを取得する
         var file = e.target.files[0];
         var reader = new FileReader();
     
-        //画像でない場合は処理終了
         if(file.type.indexOf("image") < 0){
           alert("画像ファイルを指定してください。");
           return false;
         }
     
-        //アップロードした画像を設定する
         reader.onload = (function(file){
           return function(e){
             $("#img1").attr("src", e.target.result);

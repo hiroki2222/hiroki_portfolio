@@ -7,7 +7,7 @@
 
     $dislike->sendDislike($userID,$receivedUserID);
     if($dislike==TRUE){
-        header('Location:dashboard.php');
+        header('Location:user_top.php');
     }else{
         return FALSE;
     }

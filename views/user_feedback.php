@@ -62,10 +62,10 @@
       </nav>
       </div>
     </div>
-  <div class="row">
-    <div class="col-md-8 offset-md-2 col-sm-12">
-      <div class = mx-auto>
-        <table class="table-striped mt-5 table-hover mx-auto w-100">
+    <div class="row">
+      <div class="col-md-8 offset-md-2 col-sm-12">
+        <div class = mx-auto>
+          <table class="table-striped mt-5 table-hover mx-auto w-100">
             <thead>
                 <tr>
                     <th>MessageID</th>
@@ -77,26 +77,26 @@
                 </tr>
             </thead>
             <tbody>
-                <?php
-                    foreach($tenContacts as $eachContact):
-                ?>
-                
-                <tr>
-                    <td><?php echo $eachContact['contact_id']?></td>
-                    <td><a href="user_profile.php?user_id=<?php echo $eachContact['user_id'] ?>"><?php echo $eachContact['user_id'] ?></a></td>
-                    <td>
-                      <?php if($eachContact['reported_id']):  ?>
-                      <a href="user_profile.php?user_id=<?php echo $eachContact['reported_id']?>"><?php echo $eachContact['reported_id'] ?></a>
-                      <?php endif; ?>
-                    </td>
-                    <td><?php echo $eachContact['category'] ?></td>
-                    <td><?php echo $eachContact['title'] ?></td>
-                    <td><?php echo $eachContact['content']?></td>
-                </tr>
-                <?php endforeach;?>
+              <?php
+                  foreach($tenContacts as $eachContact):
+              ?>
+              
+              <tr>
+                  <td><?php echo $eachContact['contact_id']?></td>
+                  <td><a href="user_profile.php?user_id=<?php echo $eachContact['user_id'] ?>"><?php echo $eachContact['user_id'] ?></a></td>
+                  <td>
+                    <?php if($eachContact['reported_id']):  ?>
+                    <a href="user_profile.php?user_id=<?php echo $eachContact['reported_id']?>"><?php echo $eachContact['reported_id'] ?></a>
+                    <?php endif; ?>
+                  </td>
+                  <td><?php echo $eachContact['category'] ?></td>
+                  <td><?php echo $eachContact['title'] ?></td>
+                  <td><?php echo $eachContact['content']?></td>
+              </tr>
+              <?php endforeach;?>
             </tbody>
-        </table>
-        <ul class="p-0 mt-2 overflow-hidden page">
+          </table>
+          <ul class="p-0 mt-2 overflow-hidden page">
             <?php if($page > 1):?>
                 <li><a href="user_feedback.php?page=<?php print(htmlspecialchars($page-1))?>" class="">Back</a></li>
             <?php endif; ?>
@@ -110,11 +110,10 @@
             <?php if($page < $maxPage): ?>
               <li class=""><a href="user_feedback.php?page=<?php print(htmlspecialchars($page+1))?>" class="">Next</a></li>
             <?php endif; ?>
-        </ul>
-
+          </ul>
+        </div>
       </div>
     </div>
-  </div>
     
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

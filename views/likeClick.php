@@ -12,11 +12,11 @@
         if($sendLike){
             $checkLike = $like->checkLike($receivedUserID,$userID);
             if($checkLike){
-                header('Location:dashboard.php');
+                header('Location:user_top.php');
             }
         }
     }else{
         $_SESSION['error'] = 'used_all_likes';
-        header('Location:dashboard.php');
+        header('Location:user_top.php');
     }
 ?>

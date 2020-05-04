@@ -59,41 +59,40 @@
               </li>
             </ul>
           </div>
-      </nav>
+        </nav>
       </div>
     </div>
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-8 offset-md-2 col-sm-12">
-    <table class="mx-auto table-bordered table-striped mt-5 table-hover w-100">
-        <thead>
-            <tr>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-8 offset-md-2 col-sm-12">
+          <table class="mx-auto table-bordered table-striped mt-5 table-hover w-100">
+            <thead>
+              <tr>
                 <th class="w-25">userID</th>
                 <th class="w-25">username</th>
                 <th class="w-25">Edit</th>
                 <th class="w-25">Delete</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
+             </tr>
+            </thead>
+            <tbody>
+              <?php
                 foreach($tenUsers as $eachUser):
-            ?>
-            
-            <tr>
+              ?>
+              <tr>
                 <td><?php echo $eachUser['user_id']?></td>
                 <td><?php echo $eachUser['username'] ?></td>
                 <td><a href="user_profile.php?user_id=<?php echo $eachUser['user_id']?>">Edit</a></td>
                 <td><a href="user_delete.php?user_id=<?php echo $eachUser['user_id'] ?>">Delete</td>
-            </tr>
-            <form action="user_profile.php" method="post">
-              <input type="hidden" name="user_id" value="<?php echo $eachUser['user_id']?>">
-            </form>
-            <?php
+              </tr>
+              <form action="user_profile.php" method="post">
+                <input type="hidden" name="user_id" value="<?php echo $eachUser['user_id']?>">
+              </form>
+              <?php
                 endforeach;
-            ?>
-        </tbody>
-      </table>
-      <ul class="p-0 mt-2 overflow-hidden page">
+              ?>
+            </tbody>
+          </table>
+          <ul class="p-0 mt-2 overflow-hidden page">
             <?php if($page > 1):?>
                 <li><a href="user_list.php?page=<?php print(htmlspecialchars($page-1))?>" class="">Back</a></li>
             <?php endif; ?>
@@ -107,11 +106,10 @@
             <?php if($page < $maxPage): ?>
               <li class=""><a href="user_list.php?page=<?php print(htmlspecialchars($page+1))?>" class="">Next</a></li>
             <?php endif; ?>
-        </ul>
+          </ul>
+        </div>
+      </div>
     </div>
-  </div>
-    
-</div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

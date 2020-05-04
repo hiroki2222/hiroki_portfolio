@@ -12,14 +12,14 @@
     $pic = $loggedInUser['user_image1'];
     $profileComment = $loggedInUser['profile_comment'];
     $addresses = array(
-      ' 北海道 hokkaido',' 青森県 aomori',' 岩手県 iwate',' 宮城県 miyagi',' 秋田県 akita',' 山形県 yamagata',' 福島県 fukushima',' 茨城県 ibaraki',' 栃木県 tochigi',' 群馬県 gunma',' 埼玉県 saitama',' 千葉県 chiba',' 東京都 tokyo',' 神奈川県 kanagawa',' 新潟県 niigata',' 富山県 toyama',' 石川県 ishikawa',' 福井県 fukui',' 山梨県 yamanashi',' 長野県 nagano',' 岐阜県 gifu',' 静岡県 shizuoka',' 愛知県 aichi',' 三重県 mie',' 滋賀県 shiga',' 京都府 kyoto',' 大阪府 osaka',' 兵庫県 hyogo',' 奈良県 nara',' 和歌山県 wakayama',' 鳥取県 tottori',' 島根県 shimane',' 岡山県 okayama',' 広島県 hiroshima',' 山口県 yamaguchi',' 徳島県 tokushima',' 香川県 kagawa',' 愛媛県 ehime',' 高知県 kochi',' 福岡県 fukuoka',' 佐賀県 saga',' 長崎県 nagasaki',' 熊本県 kumamoto',' 大分県 oita',' 宮崎県 miyazaki',' 鹿児島県 kagoshima',' 沖縄県 okinawa','海外 overseas'
+      'hokkaido','aomori',' iwate',' miyagi','akita','yamagata','fukushima','ibaraki','tochigi','gunma','saitama','chiba','tokyo','kanagawa','niigata','toyama','ishikawa','fukui','yamanashi','nagano','gifu','shizuoka','aichi','mie','shiga','kyoto','osaka','hyogo','nara','wakayama','tottori','shimane','okayama','hiroshima','yamaguchi','tokushima','kagawa','ehime','kochi','fukuoka','saga','nagasaki','kumamoto','oita','miyazaki','kagoshima','okinawa','overseas'
     );
     $genders = array('Male','Female')
 ?>
 <!doctype html>
 <html lang="en">
   <head>
-    <title>Title</title>
+    <title>Edit</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -32,17 +32,14 @@
     <script>
     $(function(){
       $('#myfile').change(function(e){
-        //ファイルオブジェクトを取得する
         var file = e.target.files[0];
         var reader = new FileReader();
     
-        //画像でない場合は処理終了
         if(file.type.indexOf("image") < 0){
           alert("画像ファイルを指定してください。");
           return false;
         }
     
-        //アップロードした画像を設定する
         reader.onload = (function(file){
           return function(e){
             $("#img1").attr("src", e.target.result);
@@ -72,7 +69,7 @@
           <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto mt-4 text-center" style="font-size: 18px;">
               <li class="nav-item mr-5">
-                  <a class="nav_letters nav_page_letter" href="dashboard.php"><i class="fas fa-home"></i>Home
+                  <a class="nav_letters nav_page_letter" href="user_top.php"><i class="fas fa-home"></i>Home
                   <span class="sr-only">(current)</span>
                 </a>
               </li>
@@ -91,98 +88,95 @@
       </div>
     </div>
 
-
     <div class="container">
-        <div class="mx-auto border border-0 w-50 mt-4">
-            <div class="text-dark border-0  mb-3">
-                <h2 class="text-center display-4 border-bottom">Your Profile</h2>
-            </div>
-            
-            <form action="../action/userAction.php" method="post" enctype="multipart/form-data">
-                <div class="form-row">
-                      <div class="form-group col-md-6 col-sm-12 col-xs-12 mb-4">
-                        <label for="address">Address:</label>
-                          <select name="address" id="address" class="w-100 form-control">
-                            <?php
-                              if($userAddress):
-                            ?>
-                              <?php 
-                              $addresses = array_diff($addresses,array($userAddress));
-                              $addresses = array_values($addresses);
-                              ?>
-                              <option value="<?php echo $userAddress ?>" selected><?php echo $userAddress ?></option>
-                              <?php else: ?>
-                              <option value="" selected disabled  class="form-control">Address</option>
-                              
-                            <?php endif; ?>
-                            <?php
-                              foreach($addresses AS $address):
-                              ?>
-                              <option value="<?php echo $address ?>"><?php echo $address ?></option>
-
-                              <?php endforeach; ?>
-                              
-                              
-                          </select>
-                      </div>
-                      <div class="form-group col-md-6 col-sm-12 col-xs-12 mb-4">
-                        <label for="age">Age:</label>
-                        <input type="number" name="age" id="age" class="p-4 form-control" placeholder="age" value="<?php echo $age ?>">
-                      </div>
-                      <div class="form-group col-md-6 col-sm-12 col-xs-12 mb-4">
-                        <label for="like">Your Interest:</label>
-                          <select name="like" id="like" class="w-100 form-control">
-                            <?php
-                              if($likeGender):
-                              $genders = array_diff($genders,array($likeGender));
-                              $genders = array_values($genders);
-                            ?>
-                              <option value="<?php echo $likeGender?>" selected class="form-control"><?php echo $likeGender?></option>
-                              
-                            <?php
-                              else:
-                            ?>
-                              <option value="" selected disabled  class="form-control">Looking for</option>
-                            <?php
-                              endif;
-                            ?>
-                            <?php
-                              foreach($genders AS $gender):
-                              ?>
-                              <option value="<?php echo $gender ?>"><?php echo $gender ?></option>
-
-                              <?php endforeach; ?>
-                          </select>
-                      </div>
-                      <div class="form-group col-md-6 col-sm-12 col-xs-12 mb-4">
-                        <label for="job">Job:</label>
-                        <input type="text" name="job" id="job" class="p-4 form-control" placeholder="job" value="<?php echo $job?>">
-                      </div>
-                      <div class="form-group col-md-6 col-sm-12 col-xs-12 mb-4">
-                        <label for="school">School</label>
-                        <input type="text" name="school" id="school" class="p-4 form-control" placeholder="school" value="<?php echo $school ?>">
-                      </div>
-                      <div class="form-group col-md-6 col-sm-12 col-xs-12 mb-4">
-                        <label for="hobby">Hobby:</label>
-                        <input type="text" name="hobby" id="hobby" class="p-4 form-control" placeholder="Your Hobby" value="<?php echo $hobby ?>">
-                      </div>
-                  <br>
-                  <div class="form-group col-12 mb-4">
-                    <textarea name="profile_message" id="" cols="40" rows="5" class="form-control" placeholder="Your Message (the maximum amount of characters is 200)"  maxlength="200" onKeyUp="countLength(value, 'textlength');"><?php echo $profileComment?></textarea>
-                    <span id="textlength">0</span><span>/200</span>
-                  </div>
-                  <br>
-                  <br>
-                  <div class="form-group col-md-12">
-                        <button type="submit" class="btn-red form-control text-uppercase btn-lg" name="add">Edit</button>
-                  </div>
-                  <div class="form-group col-md-12">
-                        <button type="submit" class="btn-grey form-control text-uppercase btn-lg" name="skip">Cancel</button>
-                  </div>
-                </div>
-            </form>
+      <div class="mx-auto border border-0 w-50 mt-4">
+        <div class="text-dark border-0  mb-3">
+          <h2 class="text-center display-4 border-bottom">Your Profile</h2>
         </div>
-      </div>
+            
+        <form action="../action/userAction.php" method="post" enctype="multipart/form-data">
+          <div class="form-row">
+            <div class="form-group col-md-6 col-sm-12 col-xs-12 mb-4">
+              <label for="address">Address:</label>
+                <select name="address" id="address" class="w-100 form-control">
+                  <?php
+                    if($userAddress):
+                  ?>
+                    <?php 
+                    $addresses = array_diff($addresses,array($userAddress));
+                    $addresses = array_values($addresses);
+                    ?>
+                    <option value="<?php echo $userAddress ?>" selected><?php echo $userAddress ?></option>
+                    <?php else: ?>
+                    <option value="" selected disabled  class="form-control">Address</option>
+                    
+                  <?php endif; ?>
+                  <?php
+                    foreach($addresses AS $address):
+                    ?>
+                    <option value="<?php echo $address ?>"><?php echo $address ?></option>
+
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <div class="form-group col-md-6 col-sm-12 col-xs-12 mb-4">
+              <label for="age">Age:</label>
+              <input type="number" name="age" id="age" class="p-4 form-control" placeholder="age" value="<?php echo $age ?>">
+            </div>
+            <div class="form-group col-md-6 col-sm-12 col-xs-12 mb-4">
+              <label for="like">Your Interest:</label>
+                <select name="like" id="like" class="w-100 form-control">
+                  <?php
+                    if($likeGender):
+                    $genders = array_diff($genders,array($likeGender));
+                    $genders = array_values($genders);
+                  ?>
+                    <option value="<?php echo $likeGender?>" selected class="form-control"><?php echo $likeGender?></option>
+                    
+                  <?php
+                    else:
+                  ?>
+                    <option value="" selected disabled  class="form-control">Looking for</option>
+                  <?php
+                    endif;
+                  ?>
+                  <?php
+                    foreach($genders AS $gender):
+                    ?>
+                    <option value="<?php echo $gender ?>"><?php echo $gender ?></option>
+
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <div class="form-group col-md-6 col-sm-12 col-xs-12 mb-4">
+              <label for="job">Job:</label>
+              <input type="text" name="job" id="job" class="p-4 form-control" placeholder="job" value="<?php echo $job?>">
+            </div>
+            <div class="form-group col-md-6 col-sm-12 col-xs-12 mb-4">
+              <label for="school">School</label>
+              <input type="text" name="school" id="school" class="p-4 form-control" placeholder="school" value="<?php echo $school ?>">
+            </div>
+            <div class="form-group col-md-6 col-sm-12 col-xs-12 mb-4">
+              <label for="hobby">Hobby:</label>
+              <input type="text" name="hobby" id="hobby" class="p-4 form-control" placeholder="Your Hobby" value="<?php echo $hobby ?>">
+            </div>
+            <br>
+            <div class="form-group col-12 mb-4">
+              <textarea name="profile_message" id="" cols="40" rows="5" class="form-control" placeholder="Your Message (the maximum amount of characters is 200)"  maxlength="200" onKeyUp="countLength(value, 'textlength');"><?php echo $profileComment?></textarea>
+              <span id="textlength">0</span><span>/200</span>
+            </div>
+            <br>
+            <br>
+            <div class="form-group col-md-12">
+                  <button type="submit" class="btn-red form-control text-uppercase btn-lg" name="add">Edit</button>
+            </div>
+            <div class="form-group col-md-12">
+                  <button type="submit" class="btn-grey form-control text-uppercase btn-lg" name="skip">Cancel</button>
+            </div>
+            </div>
+          </form>
+        </div>
+    </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

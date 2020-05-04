@@ -12,48 +12,47 @@
     <link rel="stylesheet" href="../css/admin.css">
   </head>
   <body>
-  <div class="row nav_row">
-    <div class="col-12">
-      <nav class="navbar navbar-expand-lg navbar-dark static-top nav_design">
-        <a class="mt-3 ml-2 nav_letters" href="index.php" id="logo">
-          theRightOne
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav ml-auto mt-4" style="font-size: 18px;">
-            <li class="nav-item mr-5">
-              <a class="nav_letters nav_page_letter" href="adminTop.php">Home
-                    <span class="sr-only">(current)</span>
-                  </a>
-            </li>
-            <li class="nav-item mr-5">
-              <a class="nav_letters nav_page_letter" href="user_list.php">User List</a>
-            </li>
-            <li class="nav-item mr-5">
-              <a class="nav_letters nav_page_letter" href="user_feedback.php">User Feedback</a>
-            </li>
-          </ul>
-        </div>
-    </nav>
+    <div class="row nav_row">
+      <div class="col-12">
+        <nav class="navbar navbar-expand-lg navbar-dark static-top nav_design">
+          <a class="mt-3 ml-2 nav_letters" href="index.php" id="logo">
+            theRightOne
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto mt-4" style="font-size: 18px;">
+              <li class="nav-item mr-5">
+                <a class="nav_letters nav_page_letter" href="adminTop.php">Home
+                      <span class="sr-only">(current)</span>
+                </a>
+              </li>
+              <li class="nav-item mr-5">
+                <a class="nav_letters nav_page_letter" href="user_list.php">User List</a>
+              </li>
+              <li class="nav-item mr-5">
+                <a class="nav_letters nav_page_letter" href="user_feedback.php">User Feedback</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
     </div>
-  </div>
 
-<div class="container-fluid mt-5">
-    <div class="card w-50 mx-auto">
+    <div class="container-fluid mt-5">
+      <div class="card w-50 mx-auto">
         <div class="card-header text-center">
             Admin Menu
         </div>
         <div class="card-body">
-            <ul>
+          <ul>
             <a href="user_list.php"><li class="menu-list">User List</li></a>
             <a href="user_feedback.php"><li class="menu-list">User Feedback</li></a>
-            <!-- <a href="settings.php"><li class="menu-list">Change the Settings</li></a> -->
-            </ul>
+          </ul>
         </div>
+      </div>
     </div>
-</div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

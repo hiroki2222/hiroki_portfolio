@@ -53,79 +53,76 @@
   <body class="">
   <div class="row m-0 p-0 nav_row" id="navheight">
       <div class="col-12">
-      <nav class="navbar navbar-expand-lg navbar-dark static-top nav_design">
+        <nav class="navbar navbar-expand-lg navbar-dark static-top nav_design">
           <a class="nav_letters mt-3 ml-2" href="index.php" id="logo">
             theRightOne
           </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-    <div class="collapse navbar-collapse" id="navbarResponsive">
-      <ul class="navbar-nav ml-auto mt-4 text-center" style="font-size: 18px;">
-        <li class="nav-item mr-5">
-          <a class="nav_letters nav_page_letter" href="dashboard.php"><i class="fas fa-home"></i>Home
-                <span class="sr-only">(current)</span>
-              </a>
-        </li>
-        <li class="nav-item mr-5">
-          <a class="nav_letters nav_page_letter" href="profile.php"><i class="fas fa-user"></i>Profile</a>
-        </li>
-        <!-- <li class="nav-item mr-5">
-          <a class="nav_letters nav_page_letter" href="seeAllMatches.php"><i class="fas fa-heart"></i>Matches</a>
-        </li> -->
-        <li class="nav-item mr-5">
-          <a class="nav_letters nav_page_letter" href="contact.php"><i class="fas fa-envelope"></i>Contact</a>
-        </li>
-        <li class="nav-item mr-5">
-          <a class="nav_letters nav_page_letter" href="logout.php">Logout</a>
-        </li>
-      </ul>
-    </div>
-</nav>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto mt-4 text-center" style="font-size: 18px;">
+              <li class="nav-item mr-5">
+                  <a class="nav_letters nav_page_letter" href="user_top.php"><i class="fas fa-home"></i>Home
+                  <span class="sr-only">(current)</span>
+                </a>
+              </li>
+              <li class="nav-item mr-5">
+                <a class="nav_letters nav_page_letter" href="profile.php"><i class="fas fa-user"></i>Profile</a>
+              </li>
+              <li class="nav-item mr-5">
+                <a class="nav_letters nav_page_letter" href="contact.php"><i class="fas fa-envelope"></i>Contact</a>
+              </li>
+              <li class="nav-item mr-5">
+                <a class="nav_letters nav_page_letter" href="logout.php">Logout</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
       </div>
     </div>
 
 
     <div class="container">
-          <div class="mx-auto border border-0 w-50 mt-5" style="">
-              <div class="text-dark border-0  mb-3">
-                  <h2 class="text-center display-4 border-bottom">Contact</h2>
-              </div>
+      <div class="mx-auto border border-0 w-50 mt-5" style="">
+        <div class="text-dark border-0  mb-3">
+            <h2 class="text-center display-4 border-bottom">Contact</h2>
+        </div>
               
-                  <form action="" method="post">
-                      <div class="form-row">
-                            <div class="form-group col-md-12 col-sm-12 col-xs-12 mb-4">
-                              <label for="category">Category:</label>
-                                <select name="category" id="category" class="w-100 form-control" required>
-                                    <option value="report" selected>Report <?php echo $reportedUser['username'] ?></option>
-                                </select>
-                            </div>
-                                <input type="text" class="form-control" id="reported_id" name="reported_id" value="<?php echo $userID ?>" hidden>
-                            <div class="form-group col-md-12 col-sm-12 col-xs-12 mb-4">
-                                <label for="subject">Subject:</label>
-                                <input type="text" class="form-control" id="subject" name="subject" placeholder="Subject" required>
-                            </div>
-                        <br>
-                        <div class="form-group col-12 mb-4">
-                          <textarea name="content" id="" cols="40" rows="5" class="form-control" placeholder="Your Message (the maximum amount of characters is 200)"  maxlength="200" onKeyUp="countLength(value,'textlength');" required><?php echo $profileComment?></textarea>
-                          <span id="textlength">0</span><span>/200</span>
-                        </div>
-                        <br>
-                        <!-- <div class="form-group col-md-12   mb-4">
-                          <input type="file" name="pic" id="myfile" class="form-control">
-                          <img src="" alt="" id="img1" style="width:400px;height:400px;">
-                        </div> -->
-                        <br>
-                        <div class="form-group col-md-12">
-                              <button type="submit" class="btn-red form-control text-uppercase btn-lg" name="contact">Send</button>
-                        </div>
-                        <div class="form-group col-md-12">
-                              <button type="submit" class="btn-grey form-control text-uppercase btn-lg" name="cancel">Cancel</button>
-                        </div>
-                      </div>
-                  </form>
-              </div>
+        <form action="" method="post">
+          <div class="form-row">
+                <div class="form-group col-md-12 col-sm-12 col-xs-12 mb-4">
+                  <label for="category">Category:</label>
+                    <select name="category" id="category" class="w-100 form-control" required>
+                        <option value="report" selected>Report <?php echo $reportedUser['username'] ?></option>
+                    </select>
+                </div>
+                    <input type="text" class="form-control" id="reported_id" name="reported_id" value="<?php echo $userID ?>" hidden>
+                <div class="form-group col-md-12 col-sm-12 col-xs-12 mb-4">
+                    <label for="subject">Subject:</label>
+                    <input type="text" class="form-control" id="subject" name="subject" placeholder="Subject" required>
+                </div>
+            <br>
+            <div class="form-group col-12 mb-4">
+              <textarea name="content" id="" cols="40" rows="5" class="form-control" placeholder="Your Message (the maximum amount of characters is 200)"  maxlength="200" onKeyUp="countLength(value,'textlength');" required><?php echo $profileComment?></textarea>
+              <span id="textlength">0</span><span>/200</span>
+            </div>
+            <br>
+            <!-- <div class="form-group col-md-12   mb-4">
+              <input type="file" name="pic" id="myfile" class="form-control">
+              <img src="" alt="" id="img1" style="width:400px;height:400px;">
+            </div> -->
+            <br>
+            <div class="form-group col-md-12">
+                  <button type="submit" class="btn-red form-control text-uppercase btn-lg" name="contact">Send</button>
+            </div>
+            <div class="form-group col-md-12">
+                  <button type="submit" class="btn-grey form-control text-uppercase btn-lg" name="cancel">Cancel</button>
+            </div>
+          </div>
+        </form>
       </div>
+    </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

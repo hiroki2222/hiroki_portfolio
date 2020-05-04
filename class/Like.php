@@ -16,7 +16,7 @@
             $result = $this->conn->query($sql);
             if($result == TRUE){
                 return TRUE;
-                // header("Location:../views/dashboard.php");
+                // header("Location:../views/user_top.php");
                 // echo 'success';
             }else{
                 die('cannot send like '.$this->conn->error);

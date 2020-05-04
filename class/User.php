@@ -25,15 +25,7 @@
                 if($newAccount == FALSE || $newUser == FALSE){
                     die('CANNOT ADD USER: '.$this->conn->error);
                 }else{
-                    // 生成したUSER IDを取得
-                    $sql = "SELECT LAST_INSERT_ID()";
-                    $result = $this->conn->query($sql);
-                    $userIDArray = $result->fetch_assoc();
-                    // $_SESSION['registered_id'] = $userIDArray['LAST_INSERT_ID()'];
-                    // print_r($userIDArray);
-                    // $userID = $userIDArray['LAST_INSERT_ID()'];
-                    // header("location:../views/addMoreInfo.php?user_id=$userID");
-                    // header("location:../views/addMoreInfo.php");
+                    return TRUE;
                 }
             }
 
@@ -44,33 +36,16 @@
             if($result == FALSE){
                 die('CANNOT ADD INFO: '.$this->conn->error);
             }else{
-                // header('Location:../views/dashboard.php');
                 return 1;
             }
         }
 
-        // public function skipDetails(){
-        //     header ('Location:../views/login.php');
-        // }
 
         public function login($email, $password){
-            // $sqlResult = $this->conn->prepare('SELECT * FROM accounts WHERE email =? AND password=?');
-            // $sqlResult->bind_param('ss',$email,$password);
-
-            // $sqlResult->execute();
-            // // $sqlResult->store_result();
-            // $sqlResult->bind_result($id,$email,$password,$status);
-            // if ($sqlResult->fetch()) {
-            //     return TRUE;
-            // } else {
-            //     return false;
-            // }
             $sql = "SELECT * FROM accounts WHERE email='$email' AND password='$password'";
             $result = $this->conn->query($sql);
             if($result->num_rows==1){
                 return  $result->fetch_assoc();
-                // $_SESSION['user_id'] = $user['id'];
-                // return TRUE;
             }else{
                 return FALSE;
             }
@@ -99,9 +74,9 @@
 
         public function getRandomUserData($displayedUsersArray){
             if($displayedUsersArray){
-                $sql = "SELECT * FROM users WHERE user_id NOT IN (".implode(",",$displayedUsersArray).");";
+                $sql = "SELECT users.* FROM users JOIN accounts ON users.user_id = accounts.id WHERE accounts.status = 'U' AND users.user_id NOT IN (".implode(",",$displayedUsersArray).");";
             }else{
-                $sql = "SELECT * FROM users";
+                $sql = "SELECT users.* FROM users JOIN accounts ON users.user_id = accounts.id WHERE accounts.status = 'U' ";
             }
             $result = $this->conn->query($sql);
             $loggedInUserID = $_SESSION['user_id'];
@@ -152,18 +127,8 @@
                 echo 'No User Found';
             }
         }
-        // public function editUser($address,$likeGender,$job,$school,$hobby,$userID){
-        //     $sql = "UPDATE users SET address='$address',like_gender='$likeGender',job='$job',school='$school',hobby='$hobby' WHERE user_id = '$userID'";
-        //     $result = $this->conn->query($sql);
-
-        //     if($result == FALSE){
-        //         echo  'CANNOT EDIT PROFILE'. $this->conn->error;
-        //     }else{
-        //         header('Location:../views/profile.php');
-        //     }
-        // }
         public function deleteUser($userID){
-            $sql = "DELETE users,accounts FROM users JOIN accounts ON users.user_id = accounts.id WHERE user_id = '$userID'";
+            $sql = "DELETE users,accounts,matches,messages FROM users JOIN accounts ON users.user_id = accounts.id JOIN matches ON users.user_id = matches.user_id1 OR users.user_id = matches.user_id2 JOIN messages ON users.user_id = messages.user_id OR users.user_id = messages.received_user_id  WHERE users.user_id = '$userID'";
             $result = $this->conn->query($sql);
             if($result == FALSE){
                 echo 'CANNOT DELETE ACCOUNT'. $this->conn->error;
